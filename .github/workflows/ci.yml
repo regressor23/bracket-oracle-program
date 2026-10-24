@@ -54,10 +54,11 @@ jobs:
       ANCHOR_VERSION: 1.2.1
     steps:
       - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v5
         with:
           node-version-file: .nvmrc
-          package-manager-cache: false
+          cache: pnpm
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
       - name: Cache Solana toolchain
@@ -78,6 +79,13 @@ jobs:
       - run: solana --version && anchor --version
       - name: Build program
         run: anchor build
+      - run: pnpm install --frozen-lockfile
+      # anchor test starts solana-test-validator with the program at the address from
+      # Anchor.toml and runs tests/ against it; the wallet is a throwaway funded at genesis.
+      - name: Test the program on a local validator
+        run: |
+          solana-keygen new --no-bip39-passphrase --silent --outfile "$RUNNER_TEMP/test-wallet.json"
+          anchor test --skip-build --validator legacy --provider.wallet "$RUNNER_TEMP/test-wallet.json"
       - name: Upload program and IDL
         uses: actions/upload-artifact@v4
         with:

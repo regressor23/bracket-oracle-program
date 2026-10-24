@@ -1,4 +1,8 @@
 packages:
   - packages/*
+  - tests
 allowBuilds:
+  # Optional native speed-ups for ws; the JavaScript fallback is enough here.
+  bufferutil: false
   esbuild: true
+  utf-8-validate: false
