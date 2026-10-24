@@ -36,6 +36,25 @@ anchor build                              # SBF build (Agave CLI + Anchor 1.2.1)
 node packages/verify/dist/cli.js hash my-bracket.json
 ```
 
+## Devnet
+
+Program address: `8RDMewh6hyF8dhHxsKDZZrhjnqkymtxLyHnHZaADciLv`
+([Solana Explorer](https://explorer.solana.com/address/8RDMewh6hyF8dhHxsKDZZrhjnqkymtxLyHnHZaADciLv?cluster=devnet)).
+
+Deploys run only from `main`, through the manual **Deploy to devnet** workflow (Actions → Deploy to
+devnet → Run workflow). It builds the program, checks that the program keypair matches
+`declare_id!`, checks the deployer balance and deploys; the first run creates the program, later
+runs upgrade it. The workflow reads two repository secrets that never enter this repository:
+
+| Secret                    | What                                                        |
+| ------------------------- | ----------------------------------------------------------- |
+| `DEVNET_DEPLOYER_KEYPAIR` | Pays for the deploy and stays the program upgrade authority |
+| `DEVNET_PROGRAM_KEYPAIR`  | Keypair of the program address above                        |
+
+Both hold the JSON array written by `solana-keygen`. Fund the deployer with devnet SOL at
+[faucet.solana.com](https://faucet.solana.com). These are devnet-only keys; mainnet keys never go
+through CI, and mainnet upgrades will go through a Squads multisig.
+
 ## Security
 
 Please report vulnerabilities privately — see [SECURITY.md](SECURITY.md).

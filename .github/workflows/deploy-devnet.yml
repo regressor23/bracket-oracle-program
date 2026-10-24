@@ -1,0 +1,175 @@
+# Manual deploy of the program to Solana devnet. Run it from Actions → Deploy to devnet.
+# Needs two repository secrets (Settings → Secrets and variables → Actions), never committed:
+#   DEVNET_DEPLOYER_KEYPAIR — pays for the deploy and stays the program's upgrade authority
+#   DEVNET_PROGRAM_KEYPAIR  — the program address declared in lib.rs and Anchor.toml
+# Both hold the JSON array that solana-keygen writes. They are devnet-only keys; mainnet keys
+# never go through CI (mainnet upgrades will go through a Squads multisig).
+name: Deploy to devnet
+
+on:
+  workflow_dispatch:
+    inputs:
+      use_rpc:
+        description: Send write transactions through the RPC instead of validator TPUs (try it if a deploy keeps timing out)
+        type: boolean
+        default: false
+
+concurrency:
+  group: deploy-devnet
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Build and deploy to devnet
+    # Only tested code from main reaches devnet.
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      AGAVE_VERSION: v4.1.2
+      ANCHOR_VERSION: 1.2.1
+      CLUSTER_URL: https://api.devnet.solana.com
+    steps:
+      - name: Check that the keypair secrets are set
+        env:
+          DEPLOYER_KEYPAIR: ${{ secrets.DEVNET_DEPLOYER_KEYPAIR }}
+          PROGRAM_KEYPAIR: ${{ secrets.DEVNET_PROGRAM_KEYPAIR }}
+        run: |
+          missing=0
+          if [ -z "$DEPLOYER_KEYPAIR" ]; then
+            echo "::error::Add the DEVNET_DEPLOYER_KEYPAIR repository secret"
+            missing=1
+          fi
+          if [ -z "$PROGRAM_KEYPAIR" ]; then
+            echo "::error::Add the DEVNET_PROGRAM_KEYPAIR repository secret"
+            missing=1
+          fi
+          exit "$missing"
+
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          # Restore only: a deploy job never writes target/ back into the cache.
+          save-if: false
+      - name: Cache Solana toolchain
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.local/share/solana
+            ~/.cache/solana
+          key: agave-${{ env.AGAVE_VERSION }}
+      - name: Install Agave (Solana CLI)
+        run: |
+          if [ ! -x "$HOME/.local/share/solana/install/active_release/bin/solana" ]; then
+            sh -c "$(curl -sSfL "https://release.anza.xyz/${AGAVE_VERSION}/install")"
+          fi
+          echo "$HOME/.local/share/solana/install/active_release/bin" >> "$GITHUB_PATH"
+      - name: Install Anchor CLI
+        run: npm install -g "@anchor-lang/cli@${ANCHOR_VERSION}"
+      - run: solana --version && anchor --version
+
+      # Keys live in the runner's temp directory; the program keypair is also copied to
+      # target/deploy so that anchor build sees the same address as declare_id!.
+      - name: Write and check the keypairs
+        env:
+          DEPLOYER_KEYPAIR: ${{ secrets.DEVNET_DEPLOYER_KEYPAIR }}
+          PROGRAM_KEYPAIR: ${{ secrets.DEVNET_PROGRAM_KEYPAIR }}
+        run: |
+          umask 077
+          KEYS_DIR="$RUNNER_TEMP/devnet-keys"
+          echo "KEYS_DIR=$KEYS_DIR" >> "$GITHUB_ENV"
+          mkdir -p "$KEYS_DIR" target/deploy
+          printf '%s' "$DEPLOYER_KEYPAIR" > "$KEYS_DIR/deployer.json"
+          printf '%s' "$PROGRAM_KEYPAIR" > "$KEYS_DIR/program.json"
+          deployer=$(solana-keygen pubkey "$KEYS_DIR/deployer.json")
+          program=$(solana-keygen pubkey "$KEYS_DIR/program.json")
+          declared=$(sed -n 's/^declare_id!("\(.*\)");$/\1/p' programs/bracket_oracle/src/lib.rs)
+          if [ "$program" != "$declared" ]; then
+            echo "::error::DEVNET_PROGRAM_KEYPAIR holds $program, but the program declares $declared"
+            exit 1
+          fi
+          cp "$KEYS_DIR/program.json" target/deploy/bracket_oracle-keypair.json
+          echo "DEPLOYER=$deployer" >> "$GITHUB_ENV"
+          echo "PROGRAM_ID=$program" >> "$GITHUB_ENV"
+          solana config set --url "$CLUSTER_URL" --keypair "$KEYS_DIR/deployer.json" --commitment confirmed
+          echo "Deployer: $deployer"
+          echo "Program: $program"
+
+      - name: Build program
+        run: |
+          anchor build
+          # The build must not rewrite the declared program id.
+          git diff --exit-code -- programs Anchor.toml
+
+      - name: Check the deployer balance
+        run: |
+          size=$(stat -c %s target/deploy/bracket_oracle.so)
+          rent() { solana rent "$1" --lamports | grep -o '[0-9]\+' | head -n 1; }
+          sol() { awk -v lamports="$1" 'BEGIN { printf "%.3f", lamports / 1e9 }'; }
+          # The deploy writes the binary into a temporary buffer account (refunded afterwards);
+          # a first deploy also funds the program data account (37 and 45 bytes of headers).
+          needed=$(rent $((size + 37)))
+          if solana program show "$PROGRAM_ID" > /dev/null 2>&1; then
+            echo "The program exists: this run upgrades it."
+          else
+            echo "The program is not on devnet yet: this run makes the first deploy."
+            needed=$((needed + $(rent $((size + 45)))))
+          fi
+          needed=$((needed + 20000000)) # transaction fees
+          balance=$(solana balance --lamports | grep -o '[0-9]\+' | head -n 1)
+          echo "Binary: $size bytes. Needed: about $(sol "$needed") SOL. Balance: $(sol "$balance") SOL."
+          if [ "$balance" -lt "$needed" ]; then
+            echo "::error::The deployer $DEPLOYER has $(sol "$balance") SOL, the deploy needs about $(sol "$needed") SOL. Request devnet SOL at https://faucet.solana.com and run the workflow again."
+            exit 1
+          fi
+
+      - name: Deploy
+        id: deploy
+        env:
+          USE_RPC: ${{ inputs.use_rpc }}
+        run: |
+          extra=()
+          if [ "$USE_RPC" = "true" ]; then
+            extra+=(--use-rpc)
+          fi
+          solana program deploy target/deploy/bracket_oracle.so \
+            --program-id "$KEYS_DIR/program.json" \
+            --upgrade-authority "$KEYS_DIR/deployer.json" \
+            --max-sign-attempts 50 \
+            "${extra[@]}"
+
+      - name: Return SOL from unfinished buffers
+        if: failure() && steps.deploy.outcome == 'failure'
+        run: solana program close --buffers
+
+      - name: Summary
+        run: |
+          solana program show "$PROGRAM_ID"
+          {
+            echo "### Deployed to devnet"
+            echo
+            echo "- Program: \`$PROGRAM_ID\` ([Solana Explorer](https://explorer.solana.com/address/$PROGRAM_ID?cluster=devnet))"
+            echo "- Upgrade authority: \`$DEPLOYER\`"
+            echo "- Commit: \`$GITHUB_SHA\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload program and IDL
+        uses: actions/upload-artifact@v4
+        with:
+          name: bracket-oracle-devnet-${{ github.sha }}
+          path: |
+            target/deploy/*.so
+            target/idl/*.json
+          if-no-files-found: error
+
+      - name: Remove the keypairs
+        if: always()
+        run: rm -rf "$RUNNER_TEMP/devnet-keys" "$HOME/.config/solana" target/deploy/bracket_oracle-keypair.json

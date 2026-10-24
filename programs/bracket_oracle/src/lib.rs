@@ -73,4 +73,20 @@ mod tests {
         let (second, _) = Pubkey::find_program_address(&[CONFIG_SEED], &crate::ID);
         assert_eq!(first, second);
     }
+
+    /// The devnet deploy workflow checks the program keypair against `declare_id!`,
+    /// and clients read the address from `Anchor.toml`; all of them must agree.
+    #[test]
+    fn anchor_toml_program_ids_match_declare_id() {
+        let anchor_toml = include_str!("../../../Anchor.toml");
+        let ids: Vec<&str> = anchor_toml
+            .lines()
+            .filter_map(|line| line.trim().strip_prefix("bracket_oracle = "))
+            .map(|value| value.trim_matches('"'))
+            .collect();
+        assert_eq!(ids.len(), 2, "expected localnet and devnet entries");
+        for id in ids {
+            assert_eq!(id, crate::ID.to_string());
+        }
+    }
 }
