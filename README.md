@@ -11,6 +11,7 @@ us lives here.
 | `programs/bracket_oracle` | Anchor program that holds pool funds and settles them by merkle root    |
 | `packages/engine`         | Canonical JSON and hashing today; formats, scoring and payouts next     |
 | `packages/verify`         | `bracket-oracle-verify` CLI: recompute hashes (and soon roots) yourself |
+| `tests`                   | Integration tests that run the program on a local validator             |
 
 ## How verification will work
 
@@ -30,6 +31,7 @@ entries, settlement and claims arrive in stage 3.
 pnpm install && pnpm test && pnpm build   # engine and verify CLI (Node.js 22)
 cargo test                                # program logic on the host
 anchor build                              # SBF build (Agave CLI + Anchor 1.2.1)
+anchor test --skip-build --validator legacy   # initialize_config on a local validator
 ```
 
 ```bash

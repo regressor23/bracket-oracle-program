@@ -14,3 +14,6 @@ bracket_oracle = "8RDMewh6hyF8dhHxsKDZZrhjnqkymtxLyHnHZaADciLv"
 [provider]
 cluster = "localnet"
 wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "pnpm --filter @bracket-oracle/program-tests run test:validator"

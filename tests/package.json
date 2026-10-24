@@ -1,0 +1,15 @@
+{
+  "name": "@bracket-oracle/program-tests",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Integration tests that run the program on a local validator through anchor test.",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test:validator": "vitest run"
+  },
+  "devDependencies": {
+    "@anchor-lang/core": "1.2.1",
+    "@solana/web3.js": "^1.99.0"
+  }
+}
