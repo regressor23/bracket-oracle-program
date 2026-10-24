@@ -1,0 +1,17 @@
+target/
+.anchor/
+test-ledger/
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+.turbo/
+
+# Keypairs never belong in this repository.
+*-keypair.json
+id.json
+
+.env
+.env.*
+.DS_Store
+*.log

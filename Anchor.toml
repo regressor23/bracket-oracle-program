@@ -1,0 +1,16 @@
+[toolchain]
+anchor_version = "1.2.1"
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.localnet]
+bracket_oracle = "8RDMewh6hyF8dhHxsKDZZrhjnqkymtxLyHnHZaADciLv"
+
+[programs.devnet]
+bracket_oracle = "8RDMewh6hyF8dhHxsKDZZrhjnqkymtxLyHnHZaADciLv"
+
+[provider]
+cluster = "localnet"
+wallet = "~/.config/solana/id.json"

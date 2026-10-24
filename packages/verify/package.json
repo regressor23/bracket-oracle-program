@@ -1,0 +1,20 @@
+{
+  "name": "@bracket-oracle/verify",
+  "version": "0.1.0",
+  "description": "Recompute Bracket Oracle hashes and roots from published JSON.",
+  "type": "module",
+  "bin": {
+    "bracket-oracle-verify": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@bracket-oracle/engine": "workspace:*"
+  }
+}
