@@ -6,12 +6,12 @@ LoL tournaments, with free pools and USDC pools on Solana.
 This repository is public on purpose: everything needed to check a pool's result without trusting
 us lives here.
 
-| Path                      | What                                                                    |
-| ------------------------- | ----------------------------------------------------------------------- |
-| `programs/bracket_oracle` | Anchor program that holds pool funds and settles them by merkle root    |
-| `packages/engine`         | Canonical JSON and hashing today; formats, scoring and payouts next     |
-| `packages/verify`         | `bracket-oracle-verify` CLI: recompute hashes (and soon roots) yourself |
-| `tests`                   | Integration tests that run the program on a local validator             |
+| Path                      | What                                                                                              |
+| ------------------------- | ------------------------------------------------------------------------------------------------- |
+| `programs/bracket_oracle` | Anchor program that holds pool funds and settles them by merkle root                              |
+| `packages/engine`         | Canonical JSON, hashing and [format templates](packages/engine/formats); scoring and payouts next |
+| `packages/verify`         | `bracket-oracle-verify` CLI: recompute hashes, check formats (and soon roots) yourself            |
+| `tests`                   | Integration tests that run the program on a local validator                                       |
 
 ## How verification will work
 
@@ -36,6 +36,7 @@ anchor test --skip-build --validator legacy   # initialize_config on a local val
 
 ```bash
 node packages/verify/dist/cli.js hash my-bracket.json
+node packages/verify/dist/cli.js format packages/engine/formats/ti.json
 ```
 
 ## Devnet

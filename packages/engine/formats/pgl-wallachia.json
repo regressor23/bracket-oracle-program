@@ -1,0 +1,277 @@
+{
+  "id": "pgl-wallachia",
+  "version": 1,
+  "game": "dota2",
+  "name": "PGL Wallachia",
+  "reference": {
+    "event": "PGL Wallachia Season 9",
+    "url": "https://liquipedia.net/dota2/PGL/Wallachia/9",
+    "checkedOn": "2026-10-25"
+  },
+  "stages": [
+    {
+      "id": "group-stage",
+      "name": "Group stage",
+      "kind": "swiss",
+      "teams": 16,
+      "winsToFinish": 3,
+      "lossesToFinish": 3,
+      "rounds": 5,
+      "bestOf": {
+        "decisive": 3,
+        "other": 3
+      },
+      "buckets": [
+        {
+          "id": "3-0",
+          "label": "3-0",
+          "size": 2,
+          "points": 15,
+          "records": ["3-0"],
+          "advances": true
+        },
+        {
+          "id": "advance",
+          "label": "Advance (3-1 or 3-2)",
+          "size": 6,
+          "points": 10,
+          "records": ["3-1", "3-2"],
+          "advances": true
+        },
+        {
+          "id": "eliminated",
+          "label": "Eliminated (2-3 or 1-3)",
+          "size": 6,
+          "points": 10,
+          "records": ["2-3", "1-3"],
+          "advances": false
+        },
+        {
+          "id": "0-3",
+          "label": "0-3",
+          "size": 2,
+          "points": 15,
+          "records": ["0-3"],
+          "advances": false
+        }
+      ]
+    },
+    {
+      "id": "playoffs",
+      "name": "Playoffs",
+      "kind": "bracket",
+      "style": "double-elimination",
+      "teams": 8,
+      "rounds": [
+        {
+          "id": "ubqf",
+          "name": "Upper bracket quarterfinals",
+          "side": "upper",
+          "bestOf": 3,
+          "points": 10
+        },
+        {
+          "id": "ubsf",
+          "name": "Upper bracket semifinals",
+          "side": "upper",
+          "bestOf": 3,
+          "points": 15
+        },
+        {
+          "id": "ubf",
+          "name": "Upper bracket final",
+          "side": "upper",
+          "bestOf": 3,
+          "points": 20
+        },
+        {
+          "id": "lbr1",
+          "name": "Lower bracket round 1",
+          "side": "lower",
+          "bestOf": 3,
+          "points": 5
+        },
+        {
+          "id": "lbqf",
+          "name": "Lower bracket quarterfinals",
+          "side": "lower",
+          "bestOf": 3,
+          "points": 10
+        },
+        {
+          "id": "lbsf",
+          "name": "Lower bracket semifinals",
+          "side": "lower",
+          "bestOf": 3,
+          "points": 15
+        },
+        {
+          "id": "lbf",
+          "name": "Lower bracket final",
+          "side": "lower",
+          "bestOf": 3,
+          "points": 20
+        },
+        {
+          "id": "gf",
+          "name": "Grand final",
+          "side": "final",
+          "bestOf": 5,
+          "points": 40
+        }
+      ],
+      "slots": [
+        {
+          "id": "ubqf-1",
+          "round": "ubqf",
+          "top": {
+            "position": 1
+          },
+          "bottom": {
+            "position": 2
+          }
+        },
+        {
+          "id": "ubqf-2",
+          "round": "ubqf",
+          "top": {
+            "position": 3
+          },
+          "bottom": {
+            "position": 4
+          }
+        },
+        {
+          "id": "ubqf-3",
+          "round": "ubqf",
+          "top": {
+            "position": 5
+          },
+          "bottom": {
+            "position": 6
+          }
+        },
+        {
+          "id": "ubqf-4",
+          "round": "ubqf",
+          "top": {
+            "position": 7
+          },
+          "bottom": {
+            "position": 8
+          }
+        },
+        {
+          "id": "ubsf-1",
+          "round": "ubsf",
+          "top": {
+            "winnerOf": "ubqf-1"
+          },
+          "bottom": {
+            "winnerOf": "ubqf-2"
+          }
+        },
+        {
+          "id": "ubsf-2",
+          "round": "ubsf",
+          "top": {
+            "winnerOf": "ubqf-3"
+          },
+          "bottom": {
+            "winnerOf": "ubqf-4"
+          }
+        },
+        {
+          "id": "lbr1-1",
+          "round": "lbr1",
+          "top": {
+            "loserOf": "ubqf-1"
+          },
+          "bottom": {
+            "loserOf": "ubqf-2"
+          }
+        },
+        {
+          "id": "lbr1-2",
+          "round": "lbr1",
+          "top": {
+            "loserOf": "ubqf-3"
+          },
+          "bottom": {
+            "loserOf": "ubqf-4"
+          }
+        },
+        {
+          "id": "lbqf-1",
+          "round": "lbqf",
+          "top": {
+            "loserOf": "ubsf-2"
+          },
+          "bottom": {
+            "winnerOf": "lbr1-1"
+          }
+        },
+        {
+          "id": "lbqf-2",
+          "round": "lbqf",
+          "top": {
+            "loserOf": "ubsf-1"
+          },
+          "bottom": {
+            "winnerOf": "lbr1-2"
+          }
+        },
+        {
+          "id": "ubf",
+          "round": "ubf",
+          "top": {
+            "winnerOf": "ubsf-1"
+          },
+          "bottom": {
+            "winnerOf": "ubsf-2"
+          }
+        },
+        {
+          "id": "lbsf",
+          "round": "lbsf",
+          "top": {
+            "winnerOf": "lbqf-1"
+          },
+          "bottom": {
+            "winnerOf": "lbqf-2"
+          }
+        },
+        {
+          "id": "lbf",
+          "round": "lbf",
+          "top": {
+            "loserOf": "ubf"
+          },
+          "bottom": {
+            "winnerOf": "lbsf"
+          }
+        },
+        {
+          "id": "gf",
+          "round": "gf",
+          "top": {
+            "winnerOf": "ubf"
+          },
+          "bottom": {
+            "winnerOf": "lbf"
+          }
+        }
+      ]
+    }
+  ],
+  "rounds": {
+    "groups": {
+      "stage": "group-stage",
+      "lockMinutesBefore": 5
+    },
+    "bracket": {
+      "stage": "playoffs",
+      "lockMinutesBefore": 5
+    }
+  }
+}
