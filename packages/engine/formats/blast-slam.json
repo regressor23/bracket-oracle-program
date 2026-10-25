@@ -1,0 +1,201 @@
+{
+  "id": "blast-slam",
+  "version": 1,
+  "game": "dota2",
+  "name": "BLAST Slam",
+  "reference": {
+    "event": "BLAST Slam IX",
+    "url": "https://liquipedia.net/dota2/BLAST/SLAM/9",
+    "checkedOn": "2026-10-25"
+  },
+  "stages": [
+    {
+      "id": "group-stage",
+      "name": "Group stage",
+      "kind": "gsl",
+      "groups": 4,
+      "bestOf": 3,
+      "points": {
+        "first": 10,
+        "second": 10
+      }
+    },
+    {
+      "id": "seeding",
+      "name": "Seeding and last chance",
+      "kind": "not-predicted",
+      "teams": 8,
+      "summary": "Group winners play two seeding matches: winners go to the upper semifinals, losers to the upper quarterfinals. Runners-up play two last-chance matches: winners go to the upper quarterfinals, losers are out. All Bo3."
+    },
+    {
+      "id": "playoffs",
+      "name": "Playoffs",
+      "kind": "bracket",
+      "style": "double-elimination",
+      "teams": 6,
+      "rounds": [
+        {
+          "id": "ubqf",
+          "name": "Upper bracket quarterfinals",
+          "side": "upper",
+          "bestOf": 3,
+          "points": 10
+        },
+        {
+          "id": "ubsf",
+          "name": "Upper bracket semifinals",
+          "side": "upper",
+          "bestOf": 3,
+          "points": 15
+        },
+        {
+          "id": "ubf",
+          "name": "Upper bracket final",
+          "side": "upper",
+          "bestOf": 3,
+          "points": 20
+        },
+        {
+          "id": "lbqf",
+          "name": "Lower bracket quarterfinals",
+          "side": "lower",
+          "bestOf": 3,
+          "points": 10
+        },
+        {
+          "id": "lbsf",
+          "name": "Lower bracket semifinal",
+          "side": "lower",
+          "bestOf": 3,
+          "points": 15
+        },
+        {
+          "id": "lbf",
+          "name": "Lower bracket final",
+          "side": "lower",
+          "bestOf": 3,
+          "points": 20
+        },
+        {
+          "id": "gf",
+          "name": "Grand final",
+          "side": "final",
+          "bestOf": 5,
+          "points": 40
+        }
+      ],
+      "slots": [
+        {
+          "id": "ubqf-1",
+          "round": "ubqf",
+          "top": {
+            "position": 2
+          },
+          "bottom": {
+            "position": 3
+          }
+        },
+        {
+          "id": "ubqf-2",
+          "round": "ubqf",
+          "top": {
+            "position": 5
+          },
+          "bottom": {
+            "position": 6
+          }
+        },
+        {
+          "id": "ubsf-1",
+          "round": "ubsf",
+          "top": {
+            "position": 1
+          },
+          "bottom": {
+            "winnerOf": "ubqf-1"
+          }
+        },
+        {
+          "id": "ubsf-2",
+          "round": "ubsf",
+          "top": {
+            "position": 4
+          },
+          "bottom": {
+            "winnerOf": "ubqf-2"
+          }
+        },
+        {
+          "id": "lbqf-1",
+          "round": "lbqf",
+          "top": {
+            "loserOf": "ubsf-1"
+          },
+          "bottom": {
+            "loserOf": "ubqf-2"
+          }
+        },
+        {
+          "id": "lbqf-2",
+          "round": "lbqf",
+          "top": {
+            "loserOf": "ubsf-2"
+          },
+          "bottom": {
+            "loserOf": "ubqf-1"
+          }
+        },
+        {
+          "id": "ubf",
+          "round": "ubf",
+          "top": {
+            "winnerOf": "ubsf-1"
+          },
+          "bottom": {
+            "winnerOf": "ubsf-2"
+          }
+        },
+        {
+          "id": "lbsf",
+          "round": "lbsf",
+          "top": {
+            "winnerOf": "lbqf-1"
+          },
+          "bottom": {
+            "winnerOf": "lbqf-2"
+          }
+        },
+        {
+          "id": "lbf",
+          "round": "lbf",
+          "top": {
+            "loserOf": "ubf"
+          },
+          "bottom": {
+            "winnerOf": "lbsf"
+          }
+        },
+        {
+          "id": "gf",
+          "round": "gf",
+          "top": {
+            "winnerOf": "ubf"
+          },
+          "bottom": {
+            "winnerOf": "lbf"
+          }
+        }
+      ]
+    }
+  ],
+  "rounds": {
+    "groups": {
+      "stage": "group-stage",
+      "lockMinutesBefore": 5
+    },
+    "bracket": {
+      "stage": "playoffs",
+      "lockMinutesBefore": 5
+    }
+  }
+}

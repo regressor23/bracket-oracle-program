@@ -1,23 +1,27 @@
 {
   "name": "@bracket-oracle/engine",
-  "version": "0.1.0",
-  "description": "Bracket Oracle scoring engine: canonical hashing today; formats, scoring, payouts and merkle roots next.",
+  "version": "0.2.0",
+  "description": "Bracket Oracle scoring engine: canonical hashing and format templates; scoring, payouts and merkle roots next.",
   "type": "module",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    }
+    },
+    "./formats/*.json": "./formats/*.json"
   },
   "files": [
-    "dist"
+    "dist",
+    "formats"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "formats:export": "pnpm run build && node scripts/export-formats.mjs && prettier --write formats"
   },
   "dependencies": {
-    "@noble/hashes": "^2.4.0"
+    "@noble/hashes": "^2.4.0",
+    "zod": "^4.6.7"
   }
 }

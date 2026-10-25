@@ -1,0 +1,233 @@
+{
+  "id": "lol-msi",
+  "version": 1,
+  "game": "lol",
+  "name": "Mid-Season Invitational",
+  "reference": {
+    "event": "2026 Mid-Season Invitational",
+    "url": "https://liquipedia.net/leagueoflegends/Mid-Season_Invitational/2026",
+    "checkedOn": "2026-10-25"
+  },
+  "stages": [
+    {
+      "id": "play-in",
+      "name": "Play-In",
+      "kind": "not-predicted",
+      "teams": 4,
+      "summary": "Four teams in a Bo5 double-elimination bracket; the winner joins the bracket stage."
+    },
+    {
+      "id": "bracket-stage",
+      "name": "Bracket stage",
+      "kind": "bracket",
+      "style": "double-elimination",
+      "teams": 8,
+      "rounds": [
+        {
+          "id": "ubqf",
+          "name": "Upper bracket round 1",
+          "side": "upper",
+          "bestOf": 5,
+          "points": 10
+        },
+        {
+          "id": "ubsf",
+          "name": "Upper bracket round 2",
+          "side": "upper",
+          "bestOf": 5,
+          "points": 15
+        },
+        {
+          "id": "ubf",
+          "name": "Upper bracket final",
+          "side": "upper",
+          "bestOf": 5,
+          "points": 20
+        },
+        {
+          "id": "lbr1",
+          "name": "Lower bracket round 1",
+          "side": "lower",
+          "bestOf": 5,
+          "points": 5
+        },
+        {
+          "id": "lbqf",
+          "name": "Lower bracket round 2",
+          "side": "lower",
+          "bestOf": 5,
+          "points": 10
+        },
+        {
+          "id": "lbsf",
+          "name": "Lower bracket round 3",
+          "side": "lower",
+          "bestOf": 5,
+          "points": 15
+        },
+        {
+          "id": "lbf",
+          "name": "Lower bracket final",
+          "side": "lower",
+          "bestOf": 5,
+          "points": 20
+        },
+        {
+          "id": "gf",
+          "name": "Grand final",
+          "side": "final",
+          "bestOf": 5,
+          "points": 40
+        }
+      ],
+      "slots": [
+        {
+          "id": "ubqf-1",
+          "round": "ubqf",
+          "top": {
+            "position": 1
+          },
+          "bottom": {
+            "position": 2
+          }
+        },
+        {
+          "id": "ubqf-2",
+          "round": "ubqf",
+          "top": {
+            "position": 3
+          },
+          "bottom": {
+            "position": 4
+          }
+        },
+        {
+          "id": "ubqf-3",
+          "round": "ubqf",
+          "top": {
+            "position": 5
+          },
+          "bottom": {
+            "position": 6
+          }
+        },
+        {
+          "id": "ubqf-4",
+          "round": "ubqf",
+          "top": {
+            "position": 7
+          },
+          "bottom": {
+            "position": 8
+          }
+        },
+        {
+          "id": "ubsf-1",
+          "round": "ubsf",
+          "top": {
+            "winnerOf": "ubqf-1"
+          },
+          "bottom": {
+            "winnerOf": "ubqf-2"
+          }
+        },
+        {
+          "id": "ubsf-2",
+          "round": "ubsf",
+          "top": {
+            "winnerOf": "ubqf-3"
+          },
+          "bottom": {
+            "winnerOf": "ubqf-4"
+          }
+        },
+        {
+          "id": "lbr1-1",
+          "round": "lbr1",
+          "top": {
+            "loserOf": "ubqf-1"
+          },
+          "bottom": {
+            "loserOf": "ubqf-2"
+          }
+        },
+        {
+          "id": "lbr1-2",
+          "round": "lbr1",
+          "top": {
+            "loserOf": "ubqf-3"
+          },
+          "bottom": {
+            "loserOf": "ubqf-4"
+          }
+        },
+        {
+          "id": "lbqf-1",
+          "round": "lbqf",
+          "top": {
+            "loserOf": "ubsf-2"
+          },
+          "bottom": {
+            "winnerOf": "lbr1-1"
+          }
+        },
+        {
+          "id": "lbqf-2",
+          "round": "lbqf",
+          "top": {
+            "loserOf": "ubsf-1"
+          },
+          "bottom": {
+            "winnerOf": "lbr1-2"
+          }
+        },
+        {
+          "id": "ubf",
+          "round": "ubf",
+          "top": {
+            "winnerOf": "ubsf-1"
+          },
+          "bottom": {
+            "winnerOf": "ubsf-2"
+          }
+        },
+        {
+          "id": "lbsf",
+          "round": "lbsf",
+          "top": {
+            "winnerOf": "lbqf-1"
+          },
+          "bottom": {
+            "winnerOf": "lbqf-2"
+          }
+        },
+        {
+          "id": "lbf",
+          "round": "lbf",
+          "top": {
+            "loserOf": "ubf"
+          },
+          "bottom": {
+            "winnerOf": "lbsf"
+          }
+        },
+        {
+          "id": "gf",
+          "round": "gf",
+          "top": {
+            "winnerOf": "ubf"
+          },
+          "bottom": {
+            "winnerOf": "lbf"
+          }
+        }
+      ]
+    }
+  ],
+  "rounds": {
+    "bracket": {
+      "stage": "bracket-stage",
+      "lockMinutesBefore": 5
+    }
+  }
+}

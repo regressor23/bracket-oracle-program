@@ -1,0 +1,647 @@
+{
+  "$id": "https://github.com/regressor23/bracket-oracle-program/blob/main/packages/engine/formats/format.schema.json",
+  "title": "Bracket Oracle format template",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991,
+      "description": "Bumped whenever stages, slots or points change."
+    },
+    "game": {
+      "type": "string",
+      "enum": ["dota2", "cs2", "lol"]
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "reference": {
+      "type": "object",
+      "properties": {
+        "event": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "checkedOn": {
+          "type": "string",
+          "format": "date",
+          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
+        }
+      },
+      "required": ["event", "url", "checkedOn"],
+      "additionalProperties": false,
+      "description": "The event this template was checked against."
+    },
+    "stages": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
+              },
+              "kind": {
+                "type": "string",
+                "const": "swiss"
+              },
+              "teams": {
+                "type": "integer",
+                "minimum": 4,
+                "maximum": 64
+              },
+              "winsToFinish": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 9007199254740991,
+                "description": "A team stops playing once it has this many wins."
+              },
+              "lossesToFinish": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 9007199254740991,
+                "description": "A team stops playing once it has this many losses."
+              },
+              "rounds": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 9007199254740991,
+                "description": "Every team stops after this many rounds."
+              },
+              "bestOf": {
+                "type": "object",
+                "properties": {
+                  "decisive": {
+                    "anyOf": [
+                      {
+                        "type": "number",
+                        "const": 1
+                      },
+                      {
+                        "type": "number",
+                        "const": 3
+                      },
+                      {
+                        "type": "number",
+                        "const": 5
+                      }
+                    ],
+                    "description": "Series length the scoring rules know: Bo1, Bo3 or Bo5."
+                  },
+                  "other": {
+                    "anyOf": [
+                      {
+                        "type": "number",
+                        "const": 1
+                      },
+                      {
+                        "type": "number",
+                        "const": 3
+                      },
+                      {
+                        "type": "number",
+                        "const": 5
+                      }
+                    ],
+                    "description": "Series length the scoring rules know: Bo1, Bo3 or Bo5."
+                  }
+                },
+                "required": ["decisive", "other"],
+                "additionalProperties": false,
+                "description": "Series length for decisive series (a win advances or a loss eliminates) and others."
+              },
+              "eliminationRound": {
+                "description": "Extra series after the Swiss rounds, as at The International.",
+                "type": "object",
+                "properties": {
+                  "records": {
+                    "minItems": 1,
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^\\d{1,2}-\\d{1,2}$",
+                      "description": "Swiss record as \"wins-losses\", for example \"3-1\"."
+                    },
+                    "description": "Records that play the elimination round; each series pairs two such teams."
+                  },
+                  "bestOf": {
+                    "anyOf": [
+                      {
+                        "type": "number",
+                        "const": 1
+                      },
+                      {
+                        "type": "number",
+                        "const": 3
+                      },
+                      {
+                        "type": "number",
+                        "const": 5
+                      }
+                    ],
+                    "description": "Series length the scoring rules know: Bo1, Bo3 or Bo5."
+                  },
+                  "pairing": {
+                    "type": "string",
+                    "enum": ["higher-seed-picks-opponent", "organizer"]
+                  }
+                },
+                "required": ["records", "bestOf", "pairing"],
+                "additionalProperties": false
+              },
+              "buckets": {
+                "minItems": 2,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                    },
+                    "label": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 80
+                    },
+                    "size": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 9007199254740991,
+                      "description": "How many teams the player puts in this bucket."
+                    },
+                    "points": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 1000,
+                      "description": "Points for each team in the bucket that actually finished there."
+                    },
+                    "records": {
+                      "minItems": 1,
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "pattern": "^\\d{1,2}-\\d{1,2}$",
+                        "description": "Swiss record as \"wins-losses\", for example \"3-1\"."
+                      },
+                      "description": "Final Swiss records that land a team here."
+                    },
+                    "eliminationRound": {
+                      "description": "For stages with an elimination round: whether the team won or lost it.",
+                      "type": "string",
+                      "enum": ["won", "lost"]
+                    },
+                    "advances": {
+                      "type": "boolean",
+                      "description": "Whether finishing here sends the team to the next stage."
+                    }
+                  },
+                  "required": ["id", "label", "size", "points", "records", "advances"],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "kind",
+              "teams",
+              "winsToFinish",
+              "lossesToFinish",
+              "rounds",
+              "bestOf",
+              "buckets"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
+              },
+              "kind": {
+                "type": "string",
+                "const": "gsl"
+              },
+              "groups": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 16
+              },
+              "bestOf": {
+                "anyOf": [
+                  {
+                    "type": "number",
+                    "const": 1
+                  },
+                  {
+                    "type": "number",
+                    "const": 3
+                  },
+                  {
+                    "type": "number",
+                    "const": 5
+                  }
+                ],
+                "description": "Series length the scoring rules know: Bo1, Bo3 or Bo5."
+              },
+              "points": {
+                "type": "object",
+                "properties": {
+                  "first": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 1000
+                  },
+                  "second": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 1000
+                  }
+                },
+                "required": ["first", "second"],
+                "additionalProperties": false,
+                "description": "Points for naming the team that finishes first, and second, in each group."
+              }
+            },
+            "required": ["id", "name", "kind", "groups", "bestOf", "points"],
+            "additionalProperties": false,
+            "description": "Groups of four: two openers, winners and elimination matches, then a decider."
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
+              },
+              "kind": {
+                "type": "string",
+                "const": "round-robin"
+              },
+              "groups": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 16
+              },
+              "teamsPerGroup": {
+                "type": "integer",
+                "minimum": 3,
+                "maximum": 20
+              },
+              "advancePerGroup": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 9007199254740991
+              },
+              "bestOf": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "type": "number",
+                        "const": 1
+                      },
+                      {
+                        "type": "number",
+                        "const": 3
+                      },
+                      {
+                        "type": "number",
+                        "const": 5
+                      }
+                    ],
+                    "description": "Series length the scoring rules know: Bo1, Bo3 or Bo5."
+                  },
+                  {
+                    "type": "number",
+                    "const": 2
+                  }
+                ]
+              },
+              "points": {
+                "type": "object",
+                "properties": {
+                  "perQualifier": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 1000
+                  },
+                  "groupWinner": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 1000
+                  }
+                },
+                "required": ["perQualifier", "groupWinner"],
+                "additionalProperties": false,
+                "description": "Points for each team that advances, plus a bonus for the group winner."
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "kind",
+              "groups",
+              "teamsPerGroup",
+              "advancePerGroup",
+              "bestOf",
+              "points"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
+              },
+              "kind": {
+                "type": "string",
+                "const": "bracket"
+              },
+              "style": {
+                "type": "string",
+                "enum": ["single-elimination", "double-elimination"]
+              },
+              "teams": {
+                "type": "integer",
+                "minimum": 2,
+                "maximum": 64,
+                "description": "Starting positions are numbered 1..teams from the top of the bracket down; the organizer's seeding or draw fills them when the Bracket round opens."
+              },
+              "rounds": {
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                    },
+                    "name": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 80
+                    },
+                    "side": {
+                      "type": "string",
+                      "enum": ["upper", "lower", "final"]
+                    },
+                    "bestOf": {
+                      "anyOf": [
+                        {
+                          "type": "number",
+                          "const": 1
+                        },
+                        {
+                          "type": "number",
+                          "const": 3
+                        },
+                        {
+                          "type": "number",
+                          "const": 5
+                        }
+                      ],
+                      "description": "Series length the scoring rules know: Bo1, Bo3 or Bo5."
+                    },
+                    "points": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 1000,
+                      "description": "Points for naming the winner of each series in this round."
+                    }
+                  },
+                  "required": ["id", "name", "side", "bestOf", "points"],
+                  "additionalProperties": false
+                },
+                "description": "Rounds in display order: upper bracket, lower bracket, then the final."
+              },
+              "slots": {
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                    },
+                    "round": {
+                      "type": "string",
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                    },
+                    "top": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "position": {
+                              "type": "integer",
+                              "minimum": 1,
+                              "maximum": 9007199254740991
+                            }
+                          },
+                          "required": ["position"],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "winnerOf": {
+                              "type": "string",
+                              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                            }
+                          },
+                          "required": ["winnerOf"],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "loserOf": {
+                              "type": "string",
+                              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                            }
+                          },
+                          "required": ["loserOf"],
+                          "additionalProperties": false
+                        }
+                      ],
+                      "description": "Where a team in a slot comes from: a starting position, or an earlier slot."
+                    },
+                    "bottom": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "position": {
+                              "type": "integer",
+                              "minimum": 1,
+                              "maximum": 9007199254740991
+                            }
+                          },
+                          "required": ["position"],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "winnerOf": {
+                              "type": "string",
+                              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                            }
+                          },
+                          "required": ["winnerOf"],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "loserOf": {
+                              "type": "string",
+                              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                            }
+                          },
+                          "required": ["loserOf"],
+                          "additionalProperties": false
+                        }
+                      ],
+                      "description": "Where a team in a slot comes from: a starting position, or an earlier slot."
+                    }
+                  },
+                  "required": ["id", "round", "top", "bottom"],
+                  "additionalProperties": false
+                },
+                "description": "Slots in playing order; a slot only refers to slots listed before it."
+              },
+              "bracketReset": {
+                "description": "Grand final with a bracket reset. It is still one slot, see the rules.",
+                "type": "boolean"
+              }
+            },
+            "required": ["id", "name", "kind", "style", "teams", "rounds", "slots"],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
+              },
+              "kind": {
+                "type": "string",
+                "const": "not-predicted"
+              },
+              "teams": {
+                "type": "integer",
+                "minimum": 2,
+                "maximum": 9007199254740991
+              },
+              "summary": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              }
+            },
+            "required": ["id", "name", "kind", "teams", "summary"],
+            "additionalProperties": false,
+            "description": "A stage players do not predict, kept so the template describes the whole event."
+          }
+        ]
+      },
+      "description": "Stages in the order they are played."
+    },
+    "rounds": {
+      "type": "object",
+      "properties": {
+        "groups": {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            "lockMinutesBefore": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1440,
+              "description": "Lock this many minutes before the first scheduled match of the stage."
+            }
+          },
+          "required": ["stage", "lockMinutesBefore"],
+          "additionalProperties": false,
+          "description": "One of the two product rounds of a tournament: \"Groups\" or \"Bracket\"."
+        },
+        "bracket": {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            "lockMinutesBefore": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1440,
+              "description": "Lock this many minutes before the first scheduled match of the stage."
+            }
+          },
+          "required": ["stage", "lockMinutesBefore"],
+          "additionalProperties": false,
+          "description": "One of the two product rounds of a tournament: \"Groups\" or \"Bracket\"."
+        }
+      },
+      "required": ["bracket"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["id", "version", "game", "name", "reference", "stages", "rounds"],
+  "additionalProperties": false
+}
