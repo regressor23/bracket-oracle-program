@@ -18,7 +18,8 @@
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "formats:export": "pnpm run build && node scripts/export-formats.mjs && prettier --write formats"
+    "formats:export": "pnpm run build && node scripts/export-formats.mjs && prettier --write formats",
+    "version:check": "node scripts/check-version.mjs"
   },
   "dependencies": {
     "@noble/hashes": "^2.4.0",
