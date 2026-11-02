@@ -209,7 +209,9 @@ function checkBracket(stage: BracketStage, at: string, issues: FormatIssue[]) {
           push(sourcePath, `position ${source.position} is above the ${stage.teams} teams`);
         }
         positions.set(source.position, (positions.get(source.position) ?? 0) + 1);
-        if (ownSide !== 'upper') push(sourcePath, 'teams can only start in the upper bracket');
+        // Lower-bracket starts are real formats (DreamLeague: third and fourth of the group
+        // start in the lower semifinal); nobody starts in the grand final.
+        if (ownSide === 'final') push(sourcePath, 'teams cannot start in the final');
         continue;
       }
       const from = 'winnerOf' in source ? source.winnerOf : source.loserOf;

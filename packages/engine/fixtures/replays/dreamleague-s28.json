@@ -1,0 +1,684 @@
+{
+  "event": "DreamLeague Season 28",
+  "game": "dota2",
+  "dates": "2026-02-16/2026-03-01",
+  "liquipedia": "https://liquipedia.net/dota2/DreamLeague/28",
+  "checkedOn": "2026-11-03",
+  "format": {
+    "id": "dreamleague",
+    "version": 1,
+    "game": "dota2",
+    "name": "DreamLeague (replay fixture)",
+    "reference": {
+      "event": "DreamLeague Season 28",
+      "url": "https://liquipedia.net/dota2/DreamLeague/28",
+      "checkedOn": "2026-11-03"
+    },
+    "stages": [
+      {
+        "id": "group-stage-1",
+        "name": "Group stage 1",
+        "kind": "round-robin",
+        "groups": 2,
+        "teamsPerGroup": 8,
+        "advancePerGroup": 4,
+        "bestOf": 2,
+        "points": {
+          "perQualifier": 10,
+          "groupWinner": 10
+        }
+      },
+      {
+        "id": "group-stage-2",
+        "name": "Group stage 2",
+        "kind": "not-predicted",
+        "teams": 8,
+        "summary": "One single round-robin group of eight. First and second go to the upper bracket final, third and fourth to the lower bracket semifinal."
+      },
+      {
+        "id": "playoffs",
+        "name": "Playoffs",
+        "kind": "bracket",
+        "style": "double-elimination",
+        "teams": 4,
+        "rounds": [
+          {
+            "id": "ubf",
+            "name": "Upper bracket final",
+            "side": "upper",
+            "bestOf": 3,
+            "points": 20
+          },
+          {
+            "id": "lbsf",
+            "name": "Lower bracket semifinal",
+            "side": "lower",
+            "bestOf": 3,
+            "points": 15
+          },
+          {
+            "id": "lbf",
+            "name": "Lower bracket final",
+            "side": "lower",
+            "bestOf": 3,
+            "points": 20
+          },
+          {
+            "id": "gf",
+            "name": "Grand final",
+            "side": "final",
+            "bestOf": 5,
+            "points": 40
+          }
+        ],
+        "slots": [
+          {
+            "id": "ubf",
+            "round": "ubf",
+            "top": {
+              "position": 1
+            },
+            "bottom": {
+              "position": 2
+            }
+          },
+          {
+            "id": "lbsf",
+            "round": "lbsf",
+            "top": {
+              "position": 3
+            },
+            "bottom": {
+              "position": 4
+            }
+          },
+          {
+            "id": "lbf",
+            "round": "lbf",
+            "top": {
+              "loserOf": "ubf"
+            },
+            "bottom": {
+              "winnerOf": "lbsf"
+            }
+          },
+          {
+            "id": "gf",
+            "round": "gf",
+            "top": {
+              "winnerOf": "ubf"
+            },
+            "bottom": {
+              "winnerOf": "lbf"
+            }
+          }
+        ]
+      }
+    ],
+    "rounds": {
+      "groups": {
+        "stage": "group-stage-1",
+        "lockMinutesBefore": 5
+      },
+      "bracket": {
+        "stage": "playoffs",
+        "lockMinutesBefore": 5
+      }
+    }
+  },
+  "notes": [
+    "Group stage 1: every series is two games, so 1-1 draws happen. DreamLeague ranks the table by games won, which is 2 points for a series win and 1 for a draw.",
+    "Group A: BetBoom Team and OG tied for fourth; BetBoom Team won the Bo3 tiebreaker 2-1.",
+    "Group B: MOUZ and Tundra Esports tied for first on games; the organizer ranked MOUZ first by Neustadtl score, so the fixture passes that order as an admin would.",
+    "The bracket is entered in later rounds: Group stage 2 placed 1-2 in the upper bracket final and 3-4 in the lower bracket semifinal. Its points are placeholders."
+  ],
+  "teams": {
+    "aurora-gaming": "Aurora Gaming",
+    "betboom-team": "BetBoom Team",
+    "execration": "Execration",
+    "gamerlegion": "GamerLegion",
+    "mouz": "MOUZ",
+    "natus-vincere": "Natus Vincere",
+    "og": "OG",
+    "pain-gaming": "paiN Gaming",
+    "parivision": "PARIVISION",
+    "team-falcons": "Team Falcons",
+    "team-liquid": "Team Liquid",
+    "team-spirit": "Team Spirit",
+    "team-yandex": "Team Yandex",
+    "tundra-esports": "Tundra Esports",
+    "xtreme-gaming": "Xtreme Gaming",
+    "yakult-brothers": "Yakult Brothers"
+  },
+  "stages": {
+    "group-stage-1": {
+      "results": [
+        {
+          "group": "A",
+          "teams": [
+            "aurora-gaming",
+            "parivision",
+            "team-liquid",
+            "betboom-team",
+            "og",
+            "team-yandex",
+            "pain-gaming",
+            "yakult-brothers"
+          ],
+          "series": [
+            {
+              "team1": "pain-gaming",
+              "team2": "parivision",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "betboom-team",
+              "team2": "aurora-gaming",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "team-liquid",
+              "team2": "team-yandex",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "pain-gaming",
+              "team2": "aurora-gaming",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "og",
+              "team2": "yakult-brothers",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "og",
+              "team2": "team-yandex",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "parivision",
+              "team2": "betboom-team",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "team-liquid",
+              "team2": "yakult-brothers",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "betboom-team",
+              "team2": "team-yandex",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "parivision",
+              "team2": "team-liquid",
+              "score1": 1,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "pain-gaming",
+              "team2": "og",
+              "score1": 1,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "aurora-gaming",
+              "team2": "yakult-brothers",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "parivision",
+              "team2": "og",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "team-liquid",
+              "team2": "aurora-gaming",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "pain-gaming",
+              "team2": "betboom-team",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "yakult-brothers",
+              "team2": "team-yandex",
+              "score1": 1,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "parivision",
+              "team2": "team-yandex",
+              "score1": 1,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "betboom-team",
+              "team2": "team-liquid",
+              "score1": 1,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "og",
+              "team2": "aurora-gaming",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "pain-gaming",
+              "team2": "yakult-brothers",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "og",
+              "team2": "team-liquid",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "parivision",
+              "team2": "aurora-gaming",
+              "score1": 1,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "team-yandex",
+              "team2": "pain-gaming",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "betboom-team",
+              "team2": "yakult-brothers",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "og",
+              "team2": "betboom-team",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "team-yandex",
+              "team2": "aurora-gaming",
+              "score1": 1,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "team-liquid",
+              "team2": "pain-gaming",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "parivision",
+              "team2": "yakult-brothers",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            }
+          ],
+          "tiebreakers": [
+            {
+              "team1": "og",
+              "team2": "betboom-team",
+              "score1": 1,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            }
+          ],
+          "points": {
+            "win": 2,
+            "draw": 1
+          }
+        },
+        {
+          "group": "B",
+          "teams": [
+            "mouz",
+            "tundra-esports",
+            "team-falcons",
+            "xtreme-gaming",
+            "natus-vincere",
+            "team-spirit",
+            "gamerlegion",
+            "execration"
+          ],
+          "series": [
+            {
+              "team1": "team-spirit",
+              "team2": "xtreme-gaming",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "tundra-esports",
+              "team2": "mouz",
+              "score1": 1,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "team-falcons",
+              "team2": "natus-vincere",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "team-spirit",
+              "team2": "mouz",
+              "score1": 1,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "gamerlegion",
+              "team2": "execration",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "tundra-esports",
+              "team2": "xtreme-gaming",
+              "score1": 1,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "natus-vincere",
+              "team2": "gamerlegion",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "team-falcons",
+              "team2": "execration",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "team-spirit",
+              "team2": "natus-vincere",
+              "score1": 1,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "team-falcons",
+              "team2": "mouz",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "tundra-esports",
+              "team2": "gamerlegion",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "xtreme-gaming",
+              "team2": "execration",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "team-spirit",
+              "team2": "tundra-esports",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "xtreme-gaming",
+              "team2": "natus-vincere",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "team-falcons",
+              "team2": "gamerlegion",
+              "score1": 1,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "mouz",
+              "team2": "execration",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "team-spirit",
+              "team2": "team-falcons",
+              "score1": 1,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "natus-vincere",
+              "team2": "mouz",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "xtreme-gaming",
+              "team2": "gamerlegion",
+              "score1": 1,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "tundra-esports",
+              "team2": "execration",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "xtreme-gaming",
+              "team2": "team-falcons",
+              "score1": 1,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "tundra-esports",
+              "team2": "natus-vincere",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "mouz",
+              "team2": "gamerlegion",
+              "score1": 1,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "team-spirit",
+              "team2": "execration",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "xtreme-gaming",
+              "team2": "mouz",
+              "score1": 1,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "tundra-esports",
+              "team2": "team-falcons",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "team-spirit",
+              "team2": "gamerlegion",
+              "score1": 1,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            },
+            {
+              "team1": "natus-vincere",
+              "team2": "execration",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/DreamLeague/28/Group_Stage_1"
+            }
+          ],
+          "order": [
+            "mouz",
+            "tundra-esports",
+            "team-falcons",
+            "xtreme-gaming",
+            "natus-vincere",
+            "team-spirit",
+            "gamerlegion",
+            "execration"
+          ],
+          "points": {
+            "win": 2,
+            "draw": 1
+          }
+        }
+      ],
+      "expected": {
+        "A": {
+          "qualifiers": ["aurora-gaming", "parivision", "team-liquid", "betboom-team"],
+          "winner": "aurora-gaming"
+        },
+        "B": {
+          "qualifiers": ["mouz", "tundra-esports", "team-falcons", "xtreme-gaming"],
+          "winner": "mouz"
+        }
+      }
+    },
+    "playoffs": {
+      "results": {
+        "positions": ["team-liquid", "tundra-esports", "aurora-gaming", "xtreme-gaming"],
+        "series": {
+          "ubf": {
+            "team1": "team-liquid",
+            "team2": "tundra-esports",
+            "score1": 0,
+            "score2": 2,
+            "source": "https://liquipedia.net/dota2/DreamLeague/28"
+          },
+          "lbsf": {
+            "team1": "aurora-gaming",
+            "team2": "xtreme-gaming",
+            "score1": 2,
+            "score2": 1,
+            "source": "https://liquipedia.net/dota2/DreamLeague/28"
+          },
+          "lbf": {
+            "team1": "team-liquid",
+            "team2": "aurora-gaming",
+            "score1": 0,
+            "score2": 2,
+            "source": "https://liquipedia.net/dota2/DreamLeague/28"
+          },
+          "gf": {
+            "team1": "tundra-esports",
+            "team2": "aurora-gaming",
+            "score1": 3,
+            "score2": 1,
+            "source": "https://liquipedia.net/dota2/DreamLeague/28"
+          }
+        }
+      },
+      "expected": {
+        "champion": "tundra-esports",
+        "winners": {
+          "ubf": "tundra-esports",
+          "lbsf": "aurora-gaming",
+          "lbf": "aurora-gaming",
+          "gf": "tundra-esports"
+        },
+        "placements": [
+          {
+            "team": "tundra-esports",
+            "from": 1,
+            "to": 1
+          },
+          {
+            "team": "aurora-gaming",
+            "from": 2,
+            "to": 2
+          },
+          {
+            "team": "team-liquid",
+            "from": 3,
+            "to": 3
+          },
+          {
+            "team": "xtreme-gaming",
+            "from": 4,
+            "to": 4
+          }
+        ]
+      }
+    }
+  }
+}

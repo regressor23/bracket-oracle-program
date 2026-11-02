@@ -1,0 +1,510 @@
+{
+  "event": "PGL Wallachia Season 9",
+  "game": "dota2",
+  "liquipedia": "https://liquipedia.net/dota2/PGL/Wallachia/9",
+  "checkedOn": "2026-11-03",
+  "template": {
+    "id": "pgl-wallachia",
+    "version": 1
+  },
+  "teams": {
+    "1w-team": "1w Team",
+    "aurora-gaming": "Aurora Gaming",
+    "conventus-stellarum": "Conventus Stellarum",
+    "gamerlegion": "GamerLegion",
+    "hokori": "Hokori",
+    "lgd-gaming": "LGD Gaming",
+    "mouz": "MOUZ",
+    "natus-vincere": "Natus Vincere",
+    "pibbles-corp": "Pibbles Corp",
+    "pipsqueak-plus4": "Pipsqueak+4",
+    "playtime": "PlayTime",
+    "team-cobra": "Team Cobra",
+    "team-nemesis": "Team Nemesis",
+    "team-yandex": "Team Yandex",
+    "xtreme-gaming": "Xtreme Gaming",
+    "yakult-brothers": "Yakult Brothers"
+  },
+  "stages": {
+    "group-stage": {
+      "results": {
+        "teams": [
+          "team-yandex",
+          "xtreme-gaming",
+          "natus-vincere",
+          "aurora-gaming",
+          "gamerlegion",
+          "lgd-gaming",
+          "team-nemesis",
+          "1w-team",
+          "pipsqueak-plus4",
+          "conventus-stellarum",
+          "mouz",
+          "team-cobra",
+          "hokori",
+          "yakult-brothers",
+          "pibbles-corp",
+          "playtime"
+        ],
+        "rounds": [
+          [
+            {
+              "team1": "1w-team",
+              "team2": "team-nemesis",
+              "score1": 1,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "xtreme-gaming",
+              "team2": "pibbles-corp",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "conventus-stellarum",
+              "team2": "playtime",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "natus-vincere",
+              "team2": "hokori",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "aurora-gaming",
+              "team2": "pipsqueak-plus4",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "gamerlegion",
+              "team2": "team-cobra",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "team-yandex",
+              "team2": "mouz",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "lgd-gaming",
+              "team2": "yakult-brothers",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            }
+          ],
+          [
+            {
+              "team1": "conventus-stellarum",
+              "team2": "xtreme-gaming",
+              "score1": 1,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "gamerlegion",
+              "team2": "lgd-gaming",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "aurora-gaming",
+              "team2": "natus-vincere",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "team-yandex",
+              "team2": "team-nemesis",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "playtime",
+              "team2": "team-cobra",
+              "score1": 1,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "1w-team",
+              "team2": "hokori",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "pipsqueak-plus4",
+              "team2": "yakult-brothers",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "mouz",
+              "team2": "pibbles-corp",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            }
+          ],
+          [
+            {
+              "team1": "lgd-gaming",
+              "team2": "xtreme-gaming",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "team-yandex",
+              "team2": "natus-vincere",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "aurora-gaming",
+              "team2": "team-cobra",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "gamerlegion",
+              "team2": "pipsqueak-plus4",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "conventus-stellarum",
+              "team2": "1w-team",
+              "score1": 1,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "team-nemesis",
+              "team2": "mouz",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "yakult-brothers",
+              "team2": "playtime",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "pibbles-corp",
+              "team2": "hokori",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            }
+          ],
+          [
+            {
+              "team1": "team-nemesis",
+              "team2": "gamerlegion",
+              "score1": 1,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "natus-vincere",
+              "team2": "1w-team",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "lgd-gaming",
+              "team2": "aurora-gaming",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "conventus-stellarum",
+              "team2": "yakult-brothers",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "pipsqueak-plus4",
+              "team2": "team-cobra",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "mouz",
+              "team2": "hokori",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            }
+          ],
+          [
+            {
+              "team1": "1w-team",
+              "team2": "pipsqueak-plus4",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "team-nemesis",
+              "team2": "conventus-stellarum",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            },
+            {
+              "team1": "lgd-gaming",
+              "team2": "mouz",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/PGL/Wallachia/9/Group_Stage"
+            }
+          ]
+        ]
+      },
+      "expected": {
+        "records": {
+          "team-yandex": "3-0",
+          "xtreme-gaming": "3-0",
+          "natus-vincere": "3-1",
+          "aurora-gaming": "3-1",
+          "gamerlegion": "3-1",
+          "lgd-gaming": "3-2",
+          "team-nemesis": "3-2",
+          "1w-team": "3-2",
+          "pipsqueak-plus4": "2-3",
+          "conventus-stellarum": "2-3",
+          "mouz": "2-3",
+          "team-cobra": "1-3",
+          "hokori": "1-3",
+          "yakult-brothers": "1-3",
+          "pibbles-corp": "0-3",
+          "playtime": "0-3"
+        },
+        "buckets": {
+          "3-0": ["team-yandex", "xtreme-gaming"],
+          "advance": [
+            "natus-vincere",
+            "aurora-gaming",
+            "gamerlegion",
+            "lgd-gaming",
+            "team-nemesis",
+            "1w-team"
+          ],
+          "eliminated": [
+            "pipsqueak-plus4",
+            "conventus-stellarum",
+            "mouz",
+            "team-cobra",
+            "hokori",
+            "yakult-brothers"
+          ],
+          "0-3": ["pibbles-corp", "playtime"]
+        }
+      }
+    },
+    "playoffs": {
+      "results": {
+        "positions": [
+          "xtreme-gaming",
+          "team-nemesis",
+          "natus-vincere",
+          "lgd-gaming",
+          "aurora-gaming",
+          "gamerlegion",
+          "team-yandex",
+          "1w-team"
+        ],
+        "series": {
+          "ubqf-1": {
+            "team1": "xtreme-gaming",
+            "team2": "team-nemesis",
+            "score1": 2,
+            "score2": 0,
+            "source": "https://liquipedia.net/dota2/PGL/Wallachia/9"
+          },
+          "ubqf-2": {
+            "team1": "natus-vincere",
+            "team2": "lgd-gaming",
+            "score1": 1,
+            "score2": 2,
+            "source": "https://liquipedia.net/dota2/PGL/Wallachia/9"
+          },
+          "ubsf-1": {
+            "team1": "xtreme-gaming",
+            "team2": "lgd-gaming",
+            "score1": 0,
+            "score2": 2,
+            "source": "https://liquipedia.net/dota2/PGL/Wallachia/9"
+          },
+          "ubqf-3": {
+            "team1": "aurora-gaming",
+            "team2": "gamerlegion",
+            "score1": 2,
+            "score2": 0,
+            "source": "https://liquipedia.net/dota2/PGL/Wallachia/9"
+          },
+          "ubqf-4": {
+            "team1": "team-yandex",
+            "team2": "1w-team",
+            "score1": 2,
+            "score2": 0,
+            "source": "https://liquipedia.net/dota2/PGL/Wallachia/9"
+          },
+          "ubsf-2": {
+            "team1": "aurora-gaming",
+            "team2": "team-yandex",
+            "score1": 1,
+            "score2": 2,
+            "source": "https://liquipedia.net/dota2/PGL/Wallachia/9"
+          },
+          "ubf": {
+            "team1": "lgd-gaming",
+            "team2": "team-yandex",
+            "score1": 0,
+            "score2": 2,
+            "source": "https://liquipedia.net/dota2/PGL/Wallachia/9"
+          },
+          "lbr1-1": {
+            "team1": "team-nemesis",
+            "team2": "natus-vincere",
+            "score1": 1,
+            "score2": 2,
+            "source": "https://liquipedia.net/dota2/PGL/Wallachia/9"
+          },
+          "lbqf-1": {
+            "team1": "aurora-gaming",
+            "team2": "natus-vincere",
+            "score1": 0,
+            "score2": 2,
+            "source": "https://liquipedia.net/dota2/PGL/Wallachia/9"
+          },
+          "lbr1-2": {
+            "team1": "gamerlegion",
+            "team2": "1w-team",
+            "score1": 2,
+            "score2": 1,
+            "source": "https://liquipedia.net/dota2/PGL/Wallachia/9"
+          },
+          "lbqf-2": {
+            "team1": "xtreme-gaming",
+            "team2": "gamerlegion",
+            "score1": 2,
+            "score2": 0,
+            "source": "https://liquipedia.net/dota2/PGL/Wallachia/9"
+          },
+          "lbsf": {
+            "team1": "natus-vincere",
+            "team2": "xtreme-gaming",
+            "score1": 2,
+            "score2": 0,
+            "source": "https://liquipedia.net/dota2/PGL/Wallachia/9"
+          },
+          "lbf": {
+            "team1": "lgd-gaming",
+            "team2": "natus-vincere",
+            "score1": 1,
+            "score2": 2,
+            "source": "https://liquipedia.net/dota2/PGL/Wallachia/9"
+          },
+          "gf": {
+            "team1": "team-yandex",
+            "team2": "natus-vincere",
+            "score1": 3,
+            "score2": 0,
+            "source": "https://liquipedia.net/dota2/PGL/Wallachia/9"
+          }
+        }
+      },
+      "expected": {
+        "champion": "team-yandex",
+        "winners": {
+          "ubqf-1": "xtreme-gaming",
+          "ubqf-2": "lgd-gaming",
+          "ubsf-1": "lgd-gaming",
+          "ubqf-3": "aurora-gaming",
+          "ubqf-4": "team-yandex",
+          "ubsf-2": "team-yandex",
+          "ubf": "team-yandex",
+          "lbr1-1": "natus-vincere",
+          "lbqf-1": "natus-vincere",
+          "lbr1-2": "gamerlegion",
+          "lbqf-2": "xtreme-gaming",
+          "lbsf": "natus-vincere",
+          "lbf": "natus-vincere",
+          "gf": "team-yandex"
+        },
+        "placements": [
+          {
+            "team": "team-yandex",
+            "from": 1,
+            "to": 1
+          },
+          {
+            "team": "natus-vincere",
+            "from": 2,
+            "to": 2
+          },
+          {
+            "team": "lgd-gaming",
+            "from": 3,
+            "to": 3
+          },
+          {
+            "team": "xtreme-gaming",
+            "from": 4,
+            "to": 4
+          },
+          {
+            "team": "aurora-gaming",
+            "from": 5,
+            "to": 6
+          },
+          {
+            "team": "gamerlegion",
+            "from": 5,
+            "to": 6
+          },
+          {
+            "team": "team-nemesis",
+            "from": 7,
+            "to": 8
+          },
+          {
+            "team": "1w-team",
+            "from": 7,
+            "to": 8
+          }
+        ]
+      }
+    }
+  }
+}

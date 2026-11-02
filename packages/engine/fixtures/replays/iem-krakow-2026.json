@@ -1,0 +1,236 @@
+{
+  "event": "IEM Kraków 2026",
+  "game": "cs2",
+  "dates": "2026-01-28/2026-02-08",
+  "liquipedia": "https://liquipedia.net/counterstrike/Intel_Extreme_Masters/2026/Krak%C3%B3w",
+  "checkedOn": "2026-11-03",
+  "format": {
+    "id": "iem-krakow",
+    "version": 1,
+    "game": "cs2",
+    "name": "IEM Kraków (replay fixture)",
+    "reference": {
+      "event": "IEM Kraków 2026",
+      "url": "https://liquipedia.net/counterstrike/Intel_Extreme_Masters/2026/Krak%C3%B3w",
+      "checkedOn": "2026-11-03"
+    },
+    "stages": [
+      {
+        "id": "play-in",
+        "name": "Play-In",
+        "kind": "not-predicted",
+        "teams": 16,
+        "summary": "16-team double-elimination bracket, all Bo3; the top eight join the group stage."
+      },
+      {
+        "id": "group-stage",
+        "name": "Group stage",
+        "kind": "not-predicted",
+        "teams": 16,
+        "summary": "Two eight-team double-elimination groups, all Bo3. Winners go to the semifinals, second and third places to the quarterfinals."
+      },
+      {
+        "id": "playoffs",
+        "name": "Playoffs",
+        "kind": "bracket",
+        "style": "single-elimination",
+        "teams": 6,
+        "rounds": [
+          {
+            "id": "qf",
+            "name": "Quarterfinals",
+            "bestOf": 3,
+            "side": "upper",
+            "points": 10
+          },
+          {
+            "id": "sf",
+            "name": "Semifinals",
+            "bestOf": 3,
+            "side": "upper",
+            "points": 20
+          },
+          {
+            "id": "final",
+            "name": "Grand final",
+            "bestOf": 5,
+            "side": "final",
+            "points": 40
+          }
+        ],
+        "slots": [
+          {
+            "id": "qf-1",
+            "round": "qf",
+            "top": {
+              "position": 4
+            },
+            "bottom": {
+              "position": 5
+            }
+          },
+          {
+            "id": "qf-2",
+            "round": "qf",
+            "top": {
+              "position": 3
+            },
+            "bottom": {
+              "position": 6
+            }
+          },
+          {
+            "id": "sf-1",
+            "round": "sf",
+            "top": {
+              "position": 1
+            },
+            "bottom": {
+              "winnerOf": "qf-1"
+            }
+          },
+          {
+            "id": "sf-2",
+            "round": "sf",
+            "top": {
+              "position": 2
+            },
+            "bottom": {
+              "winnerOf": "qf-2"
+            }
+          },
+          {
+            "id": "final",
+            "round": "final",
+            "top": {
+              "winnerOf": "sf-1"
+            },
+            "bottom": {
+              "winnerOf": "sf-2"
+            }
+          }
+        ]
+      }
+    ],
+    "rounds": {
+      "bracket": {
+        "stage": "playoffs",
+        "lockMinutesBefore": 5
+      }
+    }
+  },
+  "notes": [
+    "The bracket with byes: group winners (positions 1 and 2) enter in the semifinals. No launch template has this shape, so the fixture carries its own; its points are placeholders.",
+    "The organizer also played a third-place match (Team Spirit 2-0 MOUZ). It is not a slot of the template, so the engine places both semifinal losers 3-4 while the prize table splits them."
+  ],
+  "teams": {
+    "aurora-gaming": "Aurora Gaming",
+    "furia": "FURIA",
+    "g2-esports": "G2 Esports",
+    "mouz": "MOUZ",
+    "team-spirit": "Team Spirit",
+    "team-vitality": "Team Vitality"
+  },
+  "stages": {
+    "playoffs": {
+      "results": {
+        "positions": [
+          "team-spirit",
+          "team-vitality",
+          "g2-esports",
+          "aurora-gaming",
+          "furia",
+          "mouz"
+        ],
+        "series": {
+          "qf-1": {
+            "team1": "aurora-gaming",
+            "team2": "furia",
+            "score1": 0,
+            "score2": 2,
+            "source": "https://liquipedia.net/counterstrike/Intel_Extreme_Masters/2026/Krak%C3%B3w"
+          },
+          "sf-1": {
+            "team1": "team-spirit",
+            "team2": "furia",
+            "score1": 1,
+            "score2": 2,
+            "source": "https://liquipedia.net/counterstrike/Intel_Extreme_Masters/2026/Krak%C3%B3w"
+          },
+          "qf-2": {
+            "team1": "g2-esports",
+            "team2": "mouz",
+            "score1": 0,
+            "score2": 2,
+            "source": "https://liquipedia.net/counterstrike/Intel_Extreme_Masters/2026/Krak%C3%B3w"
+          },
+          "sf-2": {
+            "team1": "team-vitality",
+            "team2": "mouz",
+            "score1": 2,
+            "score2": 0,
+            "source": "https://liquipedia.net/counterstrike/Intel_Extreme_Masters/2026/Krak%C3%B3w"
+          },
+          "final": {
+            "team1": "furia",
+            "team2": "team-vitality",
+            "score1": 1,
+            "score2": 3,
+            "source": "https://liquipedia.net/counterstrike/Intel_Extreme_Masters/2026/Krak%C3%B3w"
+          }
+        }
+      },
+      "expected": {
+        "champion": "team-vitality",
+        "winners": {
+          "qf-1": "furia",
+          "sf-1": "furia",
+          "qf-2": "mouz",
+          "sf-2": "team-vitality",
+          "final": "team-vitality"
+        },
+        "placements": [
+          {
+            "team": "team-vitality",
+            "from": 1,
+            "to": 1
+          },
+          {
+            "team": "furia",
+            "from": 2,
+            "to": 2
+          },
+          {
+            "team": "team-spirit",
+            "from": 3,
+            "to": 4
+          },
+          {
+            "team": "mouz",
+            "from": 3,
+            "to": 4
+          },
+          {
+            "team": "aurora-gaming",
+            "from": 5,
+            "to": 6
+          },
+          {
+            "team": "g2-esports",
+            "from": 5,
+            "to": 6
+          }
+        ]
+      },
+      "unscored": [
+        {
+          "team1": "team-spirit",
+          "team2": "mouz",
+          "score1": 2,
+          "score2": 0,
+          "source": "https://liquipedia.net/counterstrike/Intel_Extreme_Masters/2026/Krak%C3%B3w"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "event": "2026 Mid-Season Invitational",
+  "game": "lol",
+  "liquipedia": "https://liquipedia.net/leagueoflegends/Mid-Season_Invitational/2026",
+  "checkedOn": "2026-11-03",
+  "template": {
+    "id": "lol-msi",
+    "version": 1
+  },
+  "notes": ["The Play-In is not predicted. T1 won it and entered the bracket stage as position 2."],
+  "teams": {
+    "bilibili-gaming": "Bilibili Gaming",
+    "furia": "FURIA",
+    "g2-esports": "G2 Esports",
+    "hanwha-life-esports": "Hanwha Life Esports",
+    "lyon": "LYON",
+    "secret-whales": "Secret Whales",
+    "t1": "T1",
+    "top-esports": "Top Esports"
+  },
+  "stages": {
+    "bracket-stage": {
+      "results": {
+        "positions": [
+          "bilibili-gaming",
+          "t1",
+          "lyon",
+          "furia",
+          "hanwha-life-esports",
+          "secret-whales",
+          "g2-esports",
+          "top-esports"
+        ],
+        "series": {
+          "ubqf-1": {
+            "team1": "bilibili-gaming",
+            "team2": "t1",
+            "score1": 3,
+            "score2": 2,
+            "source": "https://liquipedia.net/leagueoflegends/Mid-Season_Invitational/2026"
+          },
+          "ubqf-2": {
+            "team1": "lyon",
+            "team2": "furia",
+            "score1": 3,
+            "score2": 0,
+            "source": "https://liquipedia.net/leagueoflegends/Mid-Season_Invitational/2026"
+          },
+          "ubsf-1": {
+            "team1": "bilibili-gaming",
+            "team2": "lyon",
+            "score1": 3,
+            "score2": 0,
+            "source": "https://liquipedia.net/leagueoflegends/Mid-Season_Invitational/2026"
+          },
+          "ubqf-3": {
+            "team1": "hanwha-life-esports",
+            "team2": "secret-whales",
+            "score1": 3,
+            "score2": 0,
+            "source": "https://liquipedia.net/leagueoflegends/Mid-Season_Invitational/2026"
+          },
+          "ubqf-4": {
+            "team1": "g2-esports",
+            "team2": "top-esports",
+            "score1": 3,
+            "score2": 2,
+            "source": "https://liquipedia.net/leagueoflegends/Mid-Season_Invitational/2026"
+          },
+          "ubsf-2": {
+            "team1": "hanwha-life-esports",
+            "team2": "g2-esports",
+            "score1": 3,
+            "score2": 0,
+            "source": "https://liquipedia.net/leagueoflegends/Mid-Season_Invitational/2026"
+          },
+          "ubf": {
+            "team1": "bilibili-gaming",
+            "team2": "hanwha-life-esports",
+            "score1": 3,
+            "score2": 1,
+            "source": "https://liquipedia.net/leagueoflegends/Mid-Season_Invitational/2026"
+          },
+          "lbr1-1": {
+            "team1": "t1",
+            "team2": "furia",
+            "score1": 3,
+            "score2": 0,
+            "source": "https://liquipedia.net/leagueoflegends/Mid-Season_Invitational/2026"
+          },
+          "lbqf-1": {
+            "team1": "g2-esports",
+            "team2": "t1",
+            "score1": 3,
+            "score2": 1,
+            "source": "https://liquipedia.net/leagueoflegends/Mid-Season_Invitational/2026"
+          },
+          "lbr1-2": {
+            "team1": "secret-whales",
+            "team2": "top-esports",
+            "score1": 3,
+            "score2": 1,
+            "source": "https://liquipedia.net/leagueoflegends/Mid-Season_Invitational/2026"
+          },
+          "lbqf-2": {
+            "team1": "lyon",
+            "team2": "secret-whales",
+            "score1": 3,
+            "score2": 0,
+            "source": "https://liquipedia.net/leagueoflegends/Mid-Season_Invitational/2026"
+          },
+          "lbsf": {
+            "team1": "g2-esports",
+            "team2": "lyon",
+            "score1": 0,
+            "score2": 3,
+            "source": "https://liquipedia.net/leagueoflegends/Mid-Season_Invitational/2026"
+          },
+          "lbf": {
+            "team1": "hanwha-life-esports",
+            "team2": "lyon",
+            "score1": 3,
+            "score2": 2,
+            "source": "https://liquipedia.net/leagueoflegends/Mid-Season_Invitational/2026"
+          },
+          "gf": {
+            "team1": "bilibili-gaming",
+            "team2": "hanwha-life-esports",
+            "score1": 2,
+            "score2": 3,
+            "source": "https://liquipedia.net/leagueoflegends/Mid-Season_Invitational/2026"
+          }
+        }
+      },
+      "expected": {
+        "champion": "hanwha-life-esports",
+        "winners": {
+          "ubqf-1": "bilibili-gaming",
+          "ubqf-2": "lyon",
+          "ubsf-1": "bilibili-gaming",
+          "ubqf-3": "hanwha-life-esports",
+          "ubqf-4": "g2-esports",
+          "ubsf-2": "hanwha-life-esports",
+          "ubf": "bilibili-gaming",
+          "lbr1-1": "t1",
+          "lbqf-1": "g2-esports",
+          "lbr1-2": "secret-whales",
+          "lbqf-2": "lyon",
+          "lbsf": "lyon",
+          "lbf": "hanwha-life-esports",
+          "gf": "hanwha-life-esports"
+        },
+        "placements": [
+          {
+            "team": "hanwha-life-esports",
+            "from": 1,
+            "to": 1
+          },
+          {
+            "team": "bilibili-gaming",
+            "from": 2,
+            "to": 2
+          },
+          {
+            "team": "lyon",
+            "from": 3,
+            "to": 3
+          },
+          {
+            "team": "g2-esports",
+            "from": 4,
+            "to": 4
+          },
+          {
+            "team": "t1",
+            "from": 5,
+            "to": 6
+          },
+          {
+            "team": "secret-whales",
+            "from": 5,
+            "to": 6
+          },
+          {
+            "team": "furia",
+            "from": 7,
+            "to": 8
+          },
+          {
+            "team": "top-esports",
+            "from": 7,
+            "to": 8
+          }
+        ]
+      }
+    }
+  }
+}
