@@ -210,3 +210,39 @@ export function singleElimination8(options: SingleElimination8Options): BracketS
     ],
   };
 }
+
+export interface SingleElimination6Options extends StageBase {
+  rounds: Record<keyof typeof SINGLE_ELIMINATION_8_POINTS, Omit<RoundSpec, 'points'>>;
+}
+
+/**
+ * Six teams with two byes: positions 1 and 2 enter in the semifinals, 3–6 play the
+ * quarterfinals. Same points as eight teams.
+ */
+export function singleElimination6(options: SingleElimination6Options): BracketStage {
+  const round = (
+    id: keyof typeof SINGLE_ELIMINATION_8_POINTS,
+    side: BracketRound['side'],
+  ): BracketRound => ({
+    id,
+    ...options.rounds[id],
+    side,
+    points: SINGLE_ELIMINATION_8_POINTS[id],
+  });
+
+  return {
+    id: options.id,
+    name: options.name,
+    kind: 'bracket',
+    style: 'single-elimination',
+    teams: 6,
+    rounds: [round('qf', 'upper'), round('sf', 'upper'), round('final', 'final')],
+    slots: [
+      slot('qf-1', 'qf', position(4), position(5)),
+      slot('qf-2', 'qf', position(3), position(6)),
+      slot('sf-1', 'sf', position(1), winnerOf('qf-1')),
+      slot('sf-2', 'sf', position(2), winnerOf('qf-2')),
+      slot('final', 'final', winnerOf('sf-1'), winnerOf('sf-2')),
+    ],
+  };
+}
