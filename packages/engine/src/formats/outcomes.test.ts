@@ -20,7 +20,11 @@ const win = (winner: string, loser: string, bestOf = 3, lost = 0): SeriesResult 
 const strength = (team: string) => Number(team.replace(/\D/g, ''));
 
 const deBracket = pglWallachia.stages[1] as BracketStage;
-const swiss3 = cs2Major.stages[2] as SwissStage;
+/** CS2 Major Stage 3 as at Budapest 2025 (template version 1): only decisive series are Bo3. */
+const swiss3: SwissStage = {
+  ...(cs2Major.stages[2] as SwissStage),
+  bestOf: { decisive: 3, other: 1 },
+};
 const tiSwiss = theInternational.stages[0] as SwissStage;
 
 /** Plays a bracket where the lower team number always wins 2-0 (3-1 in a Bo5). */

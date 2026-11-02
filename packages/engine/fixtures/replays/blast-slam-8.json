@@ -1,0 +1,391 @@
+{
+  "event": "BLAST Slam VIII",
+  "game": "dota2",
+  "dates": "2026-09-29/2026-10-11",
+  "liquipedia": "https://liquipedia.net/dota2/BLAST/SLAM/8",
+  "checkedOn": "2026-11-03",
+  "template": {
+    "id": "blast-slam",
+    "version": 1
+  },
+  "notes": [
+    "Seeding and last-chance series are not predicted; they are listed under \"seeding\" so the bracket positions can be checked."
+  ],
+  "teams": {
+    "1w-team": "1w Team",
+    "aurora-gaming": "Aurora Gaming",
+    "betboom-team": "BetBoom Team",
+    "gamerlegion": "GamerLegion",
+    "level-up": "Level UP",
+    "lgd-gaming": "LGD Gaming",
+    "mouz": "MOUZ",
+    "natus-vincere": "Natus Vincere",
+    "og": "OG",
+    "parivision": "PARIVISION",
+    "team-liquid": "Team Liquid",
+    "team-nemesis": "Team Nemesis",
+    "team-spirit": "Team Spirit",
+    "team-yandex": "Team Yandex",
+    "xtreme-gaming": "Xtreme Gaming",
+    "yakult-brothers": "Yakult Brothers"
+  },
+  "stages": {
+    "group-stage": {
+      "results": [
+        {
+          "group": "A",
+          "teams": ["parivision", "level-up", "lgd-gaming", "xtreme-gaming"],
+          "series": {
+            "opening1": {
+              "team1": "parivision",
+              "team2": "level-up",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+            },
+            "opening2": {
+              "team1": "lgd-gaming",
+              "team2": "xtreme-gaming",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+            },
+            "winners": {
+              "team1": "parivision",
+              "team2": "lgd-gaming",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+            },
+            "elimination": {
+              "team1": "level-up",
+              "team2": "xtreme-gaming",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+            },
+            "decider": {
+              "team1": "xtreme-gaming",
+              "team2": "lgd-gaming",
+              "score1": 1,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+            }
+          }
+        },
+        {
+          "group": "B",
+          "teams": ["team-spirit", "team-nemesis", "1w-team", "natus-vincere"],
+          "series": {
+            "opening1": {
+              "team1": "team-spirit",
+              "team2": "team-nemesis",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+            },
+            "opening2": {
+              "team1": "1w-team",
+              "team2": "natus-vincere",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+            },
+            "winners": {
+              "team1": "team-spirit",
+              "team2": "1w-team",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+            },
+            "elimination": {
+              "team1": "team-nemesis",
+              "team2": "natus-vincere",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+            },
+            "decider": {
+              "team1": "team-nemesis",
+              "team2": "1w-team",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+            }
+          }
+        },
+        {
+          "group": "C",
+          "teams": ["team-yandex", "mouz", "betboom-team", "og"],
+          "series": {
+            "opening1": {
+              "team1": "team-yandex",
+              "team2": "mouz",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+            },
+            "opening2": {
+              "team1": "betboom-team",
+              "team2": "og",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+            },
+            "winners": {
+              "team1": "team-yandex",
+              "team2": "betboom-team",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+            },
+            "elimination": {
+              "team1": "mouz",
+              "team2": "og",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+            },
+            "decider": {
+              "team1": "og",
+              "team2": "betboom-team",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+            }
+          }
+        },
+        {
+          "group": "D",
+          "teams": ["team-liquid", "yakult-brothers", "aurora-gaming", "gamerlegion"],
+          "series": {
+            "opening1": {
+              "team1": "team-liquid",
+              "team2": "yakult-brothers",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+            },
+            "opening2": {
+              "team1": "aurora-gaming",
+              "team2": "gamerlegion",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+            },
+            "winners": {
+              "team1": "aurora-gaming",
+              "team2": "team-liquid",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+            },
+            "elimination": {
+              "team1": "gamerlegion",
+              "team2": "yakult-brothers",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+            },
+            "decider": {
+              "team1": "gamerlegion",
+              "team2": "team-liquid",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+            }
+          }
+        }
+      ],
+      "expected": {
+        "A": {
+          "first": "parivision",
+          "second": "lgd-gaming",
+          "third": "xtreme-gaming",
+          "fourth": "level-up"
+        },
+        "B": {
+          "first": "team-spirit",
+          "second": "1w-team",
+          "third": "team-nemesis",
+          "fourth": "natus-vincere"
+        },
+        "C": {
+          "first": "team-yandex",
+          "second": "og",
+          "third": "betboom-team",
+          "fourth": "mouz"
+        },
+        "D": {
+          "first": "aurora-gaming",
+          "second": "gamerlegion",
+          "third": "team-liquid",
+          "fourth": "yakult-brothers"
+        }
+      }
+    },
+    "seeding": {
+      "results": [
+        {
+          "team1": "parivision",
+          "team2": "aurora-gaming",
+          "score1": 2,
+          "score2": 0,
+          "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+        },
+        {
+          "team1": "team-spirit",
+          "team2": "team-yandex",
+          "score1": 2,
+          "score2": 1,
+          "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+        },
+        {
+          "team1": "lgd-gaming",
+          "team2": "gamerlegion",
+          "score1": 2,
+          "score2": 1,
+          "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+        },
+        {
+          "team1": "1w-team",
+          "team2": "og",
+          "score1": 2,
+          "score2": 1,
+          "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+        }
+      ]
+    },
+    "playoffs": {
+      "results": {
+        "positions": [
+          "parivision",
+          "team-yandex",
+          "lgd-gaming",
+          "team-spirit",
+          "aurora-gaming",
+          "1w-team"
+        ],
+        "series": {
+          "ubqf-1": {
+            "team1": "team-yandex",
+            "team2": "lgd-gaming",
+            "score1": 2,
+            "score2": 1,
+            "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+          },
+          "ubsf-1": {
+            "team1": "parivision",
+            "team2": "team-yandex",
+            "score1": 1,
+            "score2": 2,
+            "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+          },
+          "ubqf-2": {
+            "team1": "aurora-gaming",
+            "team2": "1w-team",
+            "score1": 2,
+            "score2": 0,
+            "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+          },
+          "ubsf-2": {
+            "team1": "team-spirit",
+            "team2": "aurora-gaming",
+            "score1": 2,
+            "score2": 1,
+            "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+          },
+          "ubf": {
+            "team1": "team-yandex",
+            "team2": "team-spirit",
+            "score1": 2,
+            "score2": 0,
+            "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+          },
+          "lbqf-1": {
+            "team1": "parivision",
+            "team2": "1w-team",
+            "score1": 2,
+            "score2": 1,
+            "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+          },
+          "lbqf-2": {
+            "team1": "aurora-gaming",
+            "team2": "lgd-gaming",
+            "score1": 2,
+            "score2": 0,
+            "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+          },
+          "lbsf": {
+            "team1": "parivision",
+            "team2": "aurora-gaming",
+            "score1": 2,
+            "score2": 0,
+            "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+          },
+          "lbf": {
+            "team1": "team-spirit",
+            "team2": "parivision",
+            "score1": 2,
+            "score2": 1,
+            "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+          },
+          "gf": {
+            "team1": "team-yandex",
+            "team2": "team-spirit",
+            "score1": 3,
+            "score2": 1,
+            "source": "https://liquipedia.net/dota2/BLAST/SLAM/8"
+          }
+        }
+      },
+      "expected": {
+        "champion": "team-yandex",
+        "winners": {
+          "ubqf-1": "team-yandex",
+          "ubsf-1": "team-yandex",
+          "ubqf-2": "aurora-gaming",
+          "ubsf-2": "team-spirit",
+          "ubf": "team-yandex",
+          "lbqf-1": "parivision",
+          "lbqf-2": "aurora-gaming",
+          "lbsf": "parivision",
+          "lbf": "team-spirit",
+          "gf": "team-yandex"
+        },
+        "placements": [
+          {
+            "team": "team-yandex",
+            "from": 1,
+            "to": 1
+          },
+          {
+            "team": "team-spirit",
+            "from": 2,
+            "to": 2
+          },
+          {
+            "team": "parivision",
+            "from": 3,
+            "to": 3
+          },
+          {
+            "team": "aurora-gaming",
+            "from": 4,
+            "to": 4
+          },
+          {
+            "team": "1w-team",
+            "from": 5,
+            "to": 6
+          },
+          {
+            "team": "lgd-gaming",
+            "from": 5,
+            "to": 6
+          }
+        ]
+      }
+    }
+  }
+}

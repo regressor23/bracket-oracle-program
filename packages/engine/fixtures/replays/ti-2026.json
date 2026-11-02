@@ -1,0 +1,591 @@
+{
+  "event": "The International 2026",
+  "game": "dota2",
+  "dates": "2026-08-13/2026-08-23",
+  "liquipedia": "https://liquipedia.net/dota2/The_International/2026",
+  "checkedOn": "2026-11-03",
+  "template": {
+    "id": "ti",
+    "version": 1
+  },
+  "notes": [
+    "Team names are as Liquipedia shows them in the matches. Its group-stage standings table shows three of them under later names: TEAM VISION as PARIVISION, Iron Wing as 1w Team, BoomBoys as BetBoom Team."
+  ],
+  "teams": {
+    "aurora-gaming": "Aurora Gaming",
+    "boomboys": "BoomBoys",
+    "gamerlegion": "GamerLegion",
+    "huligani": "HULIGANI",
+    "iron-wing": "Iron Wing",
+    "lgd-gaming": "LGD Gaming",
+    "nigma-galaxy": "Nigma Galaxy",
+    "og": "OG",
+    "team-falcons": "Team Falcons",
+    "team-liquid": "Team Liquid",
+    "team-resilience": "Team Resilience",
+    "team-spirit": "Team Spirit",
+    "team-vision": "TEAM VISION",
+    "team-yandex": "Team Yandex",
+    "vici-gaming": "Vici Gaming",
+    "xtreme-gaming": "Xtreme Gaming"
+  },
+  "stages": {
+    "group-stage": {
+      "results": {
+        "teams": [
+          "team-vision",
+          "team-liquid",
+          "nigma-galaxy",
+          "team-spirit",
+          "iron-wing",
+          "team-falcons",
+          "aurora-gaming",
+          "lgd-gaming",
+          "boomboys",
+          "vici-gaming",
+          "team-yandex",
+          "team-resilience",
+          "gamerlegion",
+          "xtreme-gaming",
+          "og",
+          "huligani"
+        ],
+        "rounds": [
+          [
+            {
+              "team1": "team-falcons",
+              "team2": "lgd-gaming",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "iron-wing",
+              "team2": "nigma-galaxy",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "boomboys",
+              "team2": "og",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "team-vision",
+              "team2": "team-resilience",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "team-spirit",
+              "team2": "xtreme-gaming",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "team-liquid",
+              "team2": "vici-gaming",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "aurora-gaming",
+              "team2": "gamerlegion",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "team-yandex",
+              "team2": "huligani",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            }
+          ],
+          [
+            {
+              "team1": "team-vision",
+              "team2": "team-falcons",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "boomboys",
+              "team2": "iron-wing",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "team-spirit",
+              "team2": "aurora-gaming",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "team-yandex",
+              "team2": "team-liquid",
+              "score1": 1,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "lgd-gaming",
+              "team2": "team-resilience",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "nigma-galaxy",
+              "team2": "og",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "xtreme-gaming",
+              "team2": "gamerlegion",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "huligani",
+              "team2": "vici-gaming",
+              "score1": 1,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            }
+          ],
+          [
+            {
+              "team1": "boomboys",
+              "team2": "team-vision",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "team-liquid",
+              "team2": "team-spirit",
+              "score1": 1,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "iron-wing",
+              "team2": "team-falcons",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "lgd-gaming",
+              "team2": "nigma-galaxy",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "aurora-gaming",
+              "team2": "team-yandex",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "vici-gaming",
+              "team2": "gamerlegion",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "team-resilience",
+              "team2": "og",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "xtreme-gaming",
+              "team2": "huligani",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            }
+          ],
+          [
+            {
+              "team1": "team-vision",
+              "team2": "team-spirit",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "iron-wing",
+              "team2": "team-liquid",
+              "score1": 1,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "boomboys",
+              "team2": "aurora-gaming",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "nigma-galaxy",
+              "team2": "vici-gaming",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "lgd-gaming",
+              "team2": "xtreme-gaming",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "team-falcons",
+              "team2": "gamerlegion",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "team-resilience",
+              "team2": "team-yandex",
+              "score1": 1,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "og",
+              "team2": "huligani",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            }
+          ],
+          [
+            {
+              "team1": "team-liquid",
+              "team2": "aurora-gaming",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "nigma-galaxy",
+              "team2": "team-spirit",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "boomboys",
+              "team2": "team-falcons",
+              "score1": 1,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "lgd-gaming",
+              "team2": "vici-gaming",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "iron-wing",
+              "team2": "team-yandex",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "team-resilience",
+              "team2": "xtreme-gaming",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            },
+            {
+              "team1": "og",
+              "team2": "gamerlegion",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+            }
+          ]
+        ],
+        "eliminationRound": [
+          {
+            "team1": "team-falcons",
+            "team2": "vici-gaming",
+            "score1": 2,
+            "score2": 0,
+            "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+          },
+          {
+            "team1": "aurora-gaming",
+            "team2": "boomboys",
+            "score1": 0,
+            "score2": 2,
+            "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+          },
+          {
+            "team1": "team-spirit",
+            "team2": "team-resilience",
+            "score1": 2,
+            "score2": 1,
+            "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+          },
+          {
+            "team1": "iron-wing",
+            "team2": "gamerlegion",
+            "score1": 2,
+            "score2": 0,
+            "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+          },
+          {
+            "team1": "lgd-gaming",
+            "team2": "team-yandex",
+            "score1": 1,
+            "score2": 2,
+            "source": "https://liquipedia.net/dota2/The_International/2026/Group_Stage"
+          }
+        ]
+      },
+      "expected": {
+        "records": {
+          "team-vision": "4-0",
+          "team-liquid": "4-1",
+          "nigma-galaxy": "4-1",
+          "team-spirit": "3-2",
+          "iron-wing": "3-2",
+          "team-falcons": "3-2",
+          "aurora-gaming": "3-2",
+          "lgd-gaming": "3-2",
+          "boomboys": "2-3",
+          "vici-gaming": "2-3",
+          "team-yandex": "2-3",
+          "team-resilience": "2-3",
+          "gamerlegion": "2-3",
+          "xtreme-gaming": "1-4",
+          "og": "1-4",
+          "huligani": "0-4"
+        },
+        "buckets": {
+          "direct": ["team-vision", "team-liquid", "nigma-galaxy"],
+          "elimination-won": [
+            "team-falcons",
+            "boomboys",
+            "team-spirit",
+            "iron-wing",
+            "team-yandex"
+          ],
+          "elimination-lost": [
+            "vici-gaming",
+            "aurora-gaming",
+            "team-resilience",
+            "gamerlegion",
+            "lgd-gaming"
+          ],
+          "out": ["xtreme-gaming", "og", "huligani"]
+        }
+      }
+    },
+    "main-event": {
+      "results": {
+        "positions": [
+          "iron-wing",
+          "team-spirit",
+          "team-vision",
+          "boomboys",
+          "team-liquid",
+          "team-yandex",
+          "nigma-galaxy",
+          "team-falcons"
+        ],
+        "series": {
+          "ubqf-1": {
+            "team1": "iron-wing",
+            "team2": "team-spirit",
+            "score1": 0,
+            "score2": 2,
+            "source": "https://liquipedia.net/dota2/The_International/2026/Main_Event"
+          },
+          "ubqf-2": {
+            "team1": "team-vision",
+            "team2": "boomboys",
+            "score1": 2,
+            "score2": 1,
+            "source": "https://liquipedia.net/dota2/The_International/2026/Main_Event"
+          },
+          "ubsf-1": {
+            "team1": "team-spirit",
+            "team2": "team-vision",
+            "score1": 1,
+            "score2": 2,
+            "source": "https://liquipedia.net/dota2/The_International/2026/Main_Event"
+          },
+          "ubqf-3": {
+            "team1": "team-liquid",
+            "team2": "team-yandex",
+            "score1": 0,
+            "score2": 2,
+            "source": "https://liquipedia.net/dota2/The_International/2026/Main_Event"
+          },
+          "ubqf-4": {
+            "team1": "nigma-galaxy",
+            "team2": "team-falcons",
+            "score1": 2,
+            "score2": 1,
+            "source": "https://liquipedia.net/dota2/The_International/2026/Main_Event"
+          },
+          "ubsf-2": {
+            "team1": "team-yandex",
+            "team2": "nigma-galaxy",
+            "score1": 2,
+            "score2": 1,
+            "source": "https://liquipedia.net/dota2/The_International/2026/Main_Event"
+          },
+          "ubf": {
+            "team1": "team-vision",
+            "team2": "team-yandex",
+            "score1": 2,
+            "score2": 1,
+            "source": "https://liquipedia.net/dota2/The_International/2026/Main_Event"
+          },
+          "lbr1-1": {
+            "team1": "iron-wing",
+            "team2": "boomboys",
+            "score1": 1,
+            "score2": 2,
+            "source": "https://liquipedia.net/dota2/The_International/2026/Main_Event"
+          },
+          "lbqf-1": {
+            "team1": "nigma-galaxy",
+            "team2": "boomboys",
+            "score1": 1,
+            "score2": 2,
+            "source": "https://liquipedia.net/dota2/The_International/2026/Main_Event"
+          },
+          "lbr1-2": {
+            "team1": "team-liquid",
+            "team2": "team-falcons",
+            "score1": 2,
+            "score2": 1,
+            "source": "https://liquipedia.net/dota2/The_International/2026/Main_Event"
+          },
+          "lbqf-2": {
+            "team1": "team-spirit",
+            "team2": "team-liquid",
+            "score1": 2,
+            "score2": 0,
+            "source": "https://liquipedia.net/dota2/The_International/2026/Main_Event"
+          },
+          "lbsf": {
+            "team1": "boomboys",
+            "team2": "team-spirit",
+            "score1": 0,
+            "score2": 2,
+            "source": "https://liquipedia.net/dota2/The_International/2026/Main_Event"
+          },
+          "lbf": {
+            "team1": "team-yandex",
+            "team2": "team-spirit",
+            "score1": 0,
+            "score2": 2,
+            "source": "https://liquipedia.net/dota2/The_International/2026/Main_Event"
+          },
+          "gf": {
+            "team1": "team-vision",
+            "team2": "team-spirit",
+            "score1": 2,
+            "score2": 3,
+            "source": "https://liquipedia.net/dota2/The_International/2026/Main_Event"
+          }
+        }
+      },
+      "expected": {
+        "champion": "team-spirit",
+        "winners": {
+          "ubqf-1": "team-spirit",
+          "ubqf-2": "team-vision",
+          "ubsf-1": "team-vision",
+          "ubqf-3": "team-yandex",
+          "ubqf-4": "nigma-galaxy",
+          "ubsf-2": "team-yandex",
+          "ubf": "team-vision",
+          "lbr1-1": "boomboys",
+          "lbqf-1": "boomboys",
+          "lbr1-2": "team-liquid",
+          "lbqf-2": "team-spirit",
+          "lbsf": "team-spirit",
+          "lbf": "team-spirit",
+          "gf": "team-spirit"
+        },
+        "placements": [
+          {
+            "team": "team-spirit",
+            "from": 1,
+            "to": 1
+          },
+          {
+            "team": "team-vision",
+            "from": 2,
+            "to": 2
+          },
+          {
+            "team": "team-yandex",
+            "from": 3,
+            "to": 3
+          },
+          {
+            "team": "boomboys",
+            "from": 4,
+            "to": 4
+          },
+          {
+            "team": "nigma-galaxy",
+            "from": 5,
+            "to": 6
+          },
+          {
+            "team": "team-liquid",
+            "from": 5,
+            "to": 6
+          },
+          {
+            "team": "iron-wing",
+            "from": 7,
+            "to": 8
+          },
+          {
+            "team": "team-falcons",
+            "from": 7,
+            "to": 8
+          }
+        ]
+      }
+    }
+  }
+}

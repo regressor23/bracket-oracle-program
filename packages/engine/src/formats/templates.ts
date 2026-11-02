@@ -178,15 +178,20 @@ export const blastSlam: FormatTemplate = {
   },
 };
 
+/**
+ * Version 2 (3 November 2026): every Stage 3 series is Bo3, as at IEM Cologne Major 2026 and PGL
+ * Major Singapore 2026. Version 1 had Bo1 for series that neither advance nor eliminate, as at
+ * StarLadder Budapest Major 2025; the replay fixture of that Major keeps version 1.
+ */
 export const cs2Major: FormatTemplate = {
   id: 'cs2-major',
-  version: 1,
+  version: 2,
   game: 'cs2',
   name: 'CS2 Major',
   reference: {
     event: 'PGL Major Singapore 2026',
     url: 'https://liquipedia.net/counterstrike/PGL/2026/Singapore',
-    checkedOn: CHECKED_ON,
+    checkedOn: '2026-11-03',
   },
   stages: [
     {
@@ -205,7 +210,7 @@ export const cs2Major: FormatTemplate = {
       teams: 16,
       summary: 'Same as Stage 1 with eight new teams. The top eight go to Stage 3.',
     },
-    threeWinSwiss('stage-3', 'Stage 3', { decisive: 3, other: 1 }),
+    threeWinSwiss('stage-3', 'Stage 3', { decisive: 3, other: 3 }),
     singleElimination8({
       id: 'playoffs',
       name: 'Playoffs',

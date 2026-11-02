@@ -1,12 +1,12 @@
 {
   "id": "cs2-major",
-  "version": 1,
+  "version": 2,
   "game": "cs2",
   "name": "CS2 Major",
   "reference": {
     "event": "PGL Major Singapore 2026",
     "url": "https://liquipedia.net/counterstrike/PGL/2026/Singapore",
-    "checkedOn": "2026-10-25"
+    "checkedOn": "2026-11-03"
   },
   "stages": [
     {
@@ -33,7 +33,7 @@
       "rounds": 5,
       "bestOf": {
         "decisive": 3,
-        "other": 1
+        "other": 3
       },
       "buckets": [
         {

@@ -106,6 +106,37 @@ describe('validateFormat: brackets', () => {
       'stages[1].bracketReset: only a double-elimination grand final can be reset',
     );
   });
+
+  it('lets teams start in the lower bracket but not in the final', () => {
+    // DreamLeague: first and second meet in the upper final, third and fourth start lower.
+    const fourTeams = (gfTop: BracketStage['slots'][number]['top']): FormatTemplate => {
+      const template = copy(pglWallachia);
+      template.stages[1] = {
+        id: 'playoffs',
+        name: 'Playoffs',
+        kind: 'bracket',
+        style: 'double-elimination',
+        teams: 4,
+        rounds: [
+          { id: 'ubf', name: 'Upper final', side: 'upper', bestOf: 3, points: 20 },
+          { id: 'lbsf', name: 'Lower semifinal', side: 'lower', bestOf: 3, points: 15 },
+          { id: 'lbf', name: 'Lower final', side: 'lower', bestOf: 3, points: 20 },
+          { id: 'gf', name: 'Grand final', side: 'final', bestOf: 5, points: 40 },
+        ],
+        slots: [
+          { id: 'ubf', round: 'ubf', top: { position: 1 }, bottom: { position: 2 } },
+          { id: 'lbsf', round: 'lbsf', top: { position: 3 }, bottom: { position: 4 } },
+          { id: 'lbf', round: 'lbf', top: { loserOf: 'ubf' }, bottom: { winnerOf: 'lbsf' } },
+          { id: 'gf', round: 'gf', top: gfTop, bottom: { winnerOf: 'lbf' } },
+        ],
+      };
+      return template;
+    };
+    expect(issuesOf(fourTeams({ winnerOf: 'ubf' }))).toEqual([]);
+    expect(issuesOf(fourTeams({ position: 1 }))).toContain(
+      'stages[1].slots[3].top: teams cannot start in the final',
+    );
+  });
 });
 
 describe('validateFormat: Swiss', () => {
