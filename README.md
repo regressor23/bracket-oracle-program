@@ -39,6 +39,20 @@ node packages/verify/dist/cli.js hash my-bracket.json
 node packages/verify/dist/cli.js format packages/engine/formats/ti.json
 ```
 
+## Releasing the engine
+
+The private monorepo installs `@bracket-oracle/engine` straight from a tag of this repository
+(`github:regressor23/bracket-oracle-program#v<version>&path:packages/engine`), so a release is a tag,
+not an npm publish.
+
+1. Bump `version` in `packages/engine/package.json` and `ENGINE_VERSION` in
+   `packages/engine/src/index.ts` together; CI fails when they differ.
+2. Merge to `main`.
+3. Run **Release engine** from the Actions tab. It checks the versions, builds and tests the engine,
+   commits `packages/engine/dist` on top of `main` and pushes the tag `v<version>` pointing at that
+   commit. An existing tag is never moved.
+4. In the monorepo, change the tag in the pnpm catalog and update the lockfile.
+
 ## Devnet
 
 Program address: `8RDMewh6hyF8dhHxsKDZZrhjnqkymtxLyHnHZaADciLv`

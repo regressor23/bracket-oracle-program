@@ -25,6 +25,7 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @bracket-oracle/engine run version:check
       - run: pnpm format:check
       - run: pnpm lint
       - run: pnpm build

@@ -1,0 +1,57 @@
+name: Release engine
+
+# Publishes @bracket-oracle/engine for the private monorepo, which installs it as a pnpm git
+# dependency (ADR 0013 in bracket-oracle). The tag v<version> points at a release commit that
+# adds the build output (packages/engine/dist) on top of main; main itself never holds dist.
+# Run it from the Actions tab after the version bump is merged.
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: release-engine
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Tag the engine with its build output
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Read the version
+        id: version
+        run: echo "tag=v$(node -p "require('./packages/engine/package.json').version")" >> "$GITHUB_OUTPUT"
+      - name: Check the tag, package.json and ENGINE_VERSION agree
+        run: pnpm --filter @bracket-oracle/engine run version:check ${{ steps.version.outputs.tag }}
+      - name: Refuse to move an existing tag
+        run: |
+          if git rev-parse -q --verify "refs/tags/${{ steps.version.outputs.tag }}" >/dev/null; then
+            echo "Tag ${{ steps.version.outputs.tag }} already exists; bump the version first." >&2
+            exit 1
+          fi
+      - run: pnpm --filter @bracket-oracle/engine run build
+      - run: pnpm --filter @bracket-oracle/engine run test
+      - name: Commit the build output and tag it
+        env:
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --force packages/engine/dist
+          git commit -m "Release @bracket-oracle/engine ${TAG} with build output"
+          git tag -a "$TAG" -m "@bracket-oracle/engine ${TAG}"
+          git show "$TAG:packages/engine/dist/index.js" > /dev/null
+          git push origin "refs/tags/${TAG}"
