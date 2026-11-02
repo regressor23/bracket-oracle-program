@@ -19,8 +19,11 @@ export {
   SINGLE_ELIMINATION_8_POINTS,
   doubleElimination6,
   doubleElimination8,
+  singleElimination6,
   singleElimination8,
+  type SingleElimination6Options,
 } from './brackets.js';
+export * from './outcomes.js';
 export {
   FORMAT_TEMPLATES,
   blastSlam,
