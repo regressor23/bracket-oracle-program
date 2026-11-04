@@ -9,6 +9,11 @@ to the engine or a template that would score a past event differently is caught 
 Results were read on Liquipedia on 3 November 2026. Each series links to the page it was read
 from.
 
+The fixtures ship with the package from v0.4.1 as
+`@bracket-oracle/engine/fixtures/replays/<file>.json`. The platform reads the same files in its
+acceptance test, where the events that have recorded PandaScore answers also go through import,
+polling and confirmation before their outcomes are compared.
+
 | File                                  | Event                          | Stages replayed                                   | What it covers                                                      |
 | ------------------------------------- | ------------------------------ | ------------------------------------------------- | ------------------------------------------------------------------- |
 | `ti-2026.json`                        | The International 2026         | Swiss to 4 wins with elimination round; 8-team DE | Elimination-round buckets; the Bo5 grand final                      |
