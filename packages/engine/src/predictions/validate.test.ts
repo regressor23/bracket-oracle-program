@@ -72,15 +72,14 @@ describe('checkPrediction: brackets', () => {
   it('reports picks that no longer fit the earlier picks as stale', () => {
     const doc = fullBracket();
     if (doc.picks.kind !== 'bracket') throw new Error('bracket expected');
-    // The player changed ubqf-1 to b but left the rest: a no longer reaches the upper semifinal,
-    // b no longer plays the first lower round, and everything that depends on them follows.
+    // The player changed ubqf-1 to b but left the rest: a no longer reaches the upper semifinal
+    // or the final, b no longer plays the first lower round, and the picks on c and e that came
+    // through those slots follow. g still reaches lbqf-1 and lbsf through the player's own picks.
     doc.picks.slots['ubqf-1'] = { winner: 'b' };
     const check = checkPrediction(doc, { participants: bracketTeams });
     expect(check.ok).toBe(true);
     expect(check.stale).toEqual(
-      ['ubsf-1', 'lbr1-1', 'lbqf-1', 'lbqf-2', 'ubf', 'lbsf', 'lbf', 'gf'].map(
-        (slot) => `picks.slots.${slot}`,
-      ),
+      ['ubsf-1', 'lbr1-1', 'lbqf-2', 'ubf', 'lbf', 'gf'].map((slot) => `picks.slots.${slot}`),
     );
   });
 

@@ -150,7 +150,7 @@ describe('The International 2026, Bracket round', () => {
 
   it('ranks by points, then the tie-break, and shares equal places', () => {
     expect(contest).toMatchObject({ complete: true, mapsPlayed: 39, issues: [] });
-    expect(contest.entries.map((e) => [e.id, e.place.from, e.place.to])).toEqual([
+    expect(contest.entries.slice(0, -1).map((e) => [e.id, e.place?.from, e.place?.to])).toEqual([
       ['perfect', 1, 1],
       // 38 and 40 maps are both one away from 39: a shared second place.
       ['spirit-close', 2, 3],
@@ -158,9 +158,29 @@ describe('The International 2026, Bracket round', () => {
       ['spirit-far', 4, 4],
       ['spirit-blank', 5, 5],
       ['seeds', 6, 6],
-      ['broken', 7, 7],
     ]);
+    // An invalid document scores nothing and takes no place, so no valid entry shares one with it.
+    expect(contest.entries.at(-1)).toMatchObject({ id: 'broken', points: 0, place: null });
     expect(contest.entries.at(-1)?.issues[0]).toMatch(/^tournament: /);
+  });
+
+  it('refuses predictions for another contest when the contest is given', () => {
+    const other = bracket('other', PERFECT, 39);
+    other.prediction.contest = 'another-contest';
+    const result = scoreContest({
+      template: theInternational,
+      round: 'bracket',
+      contest: 'ti-2026-bracket',
+      results,
+      entries: [bracket('mine', SEEDS, 39), other],
+    });
+    expect(result.entries.map((e) => [e.id, e.points, e.place?.from ?? null])).toEqual([
+      ['mine', 250, 1],
+      ['other', 0, null],
+    ]);
+    expect(result.entries[1]?.issues).toEqual([
+      'contest: the prediction is for contest another-contest, not ti-2026-bracket',
+    ]);
   });
 
   it('counts the maps played for the tie-break', () => {
@@ -213,7 +233,7 @@ describe('The International 2026, Groups round', () => {
       results: ti.stages['group-stage'].results,
       entries: [groups('swapped', swapped), groups('perfect', truth)],
     });
-    expect(contest.entries.map((e) => [e.id, formatPoints(e.points), e.place.from])).toEqual([
+    expect(contest.entries.map((e) => [e.id, formatPoints(e.points), e.place?.from])).toEqual([
       ['perfect', '190.0', 1],
       ['swapped', '165.0', 2],
     ]);

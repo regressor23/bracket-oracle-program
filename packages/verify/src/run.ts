@@ -42,6 +42,7 @@ Commands:
                        pass { "prediction": ..., "participants": ... } to check the teams too
   score <file.json>    Recompute the points and places of a contest:
                        { "format": "<template id>" or a template, "round": "groups" or "bracket",
+                         "contest": optional id every prediction must name,
                          "results": the stage's results, "entries": [{ "id", "prediction" }],
                          "settings": optional underdog shares and team replacements }
   version              Print the engine version used for verification
@@ -188,6 +189,7 @@ function describePrediction(input: unknown): { lines: string[]; issues: string[]
 interface ScoreInput {
   format: string | FormatTemplate;
   round: 'groups' | 'bracket';
+  contest?: string;
   results: StageResults;
   entries: { id: string; prediction: unknown }[];
   settings?: ScoringSettings;
@@ -202,6 +204,7 @@ function describeScores(input: ScoreInput): { lines: string[]; issues: string[] 
   const contest = scoreContest({
     template,
     round: input.round,
+    ...(input.contest === undefined ? {} : { contest: input.contest }),
     results: input.results,
     entries: input.entries,
     ...(input.settings ? { settings: input.settings } : {}),
@@ -213,7 +216,12 @@ function describeScores(input: ScoreInput): { lines: string[]; issues: string[] 
     `${template.id} v${template.version}, ${contest.round} round (${contest.stage}): ${state}`,
   ];
   for (const e of contest.entries) {
-    const place = e.place.from === e.place.to ? `${e.place.from}` : `${e.place.from}-${e.place.to}`;
+    const place =
+      e.place === null
+        ? 'invalid'
+        : e.place.from === e.place.to
+          ? `${e.place.from}`
+          : `${e.place.from}-${e.place.to}`;
     const tiebreak =
       e.tiebreak === null
         ? 'no tie-break'

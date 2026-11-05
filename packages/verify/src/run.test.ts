@@ -176,8 +176,10 @@ describe('verify CLI', () => {
       expect.stringMatching(
         /^2\. theirs: 10\.0 points, 1 correct, 0 exact, 0 pending, tie-break 30, sha256 [0-9a-f]{64}$/,
       ),
-      // A valid document for the other round: it has a hash but scores nothing here.
-      expect.stringMatching(/^3\. broken: 0\.0 points, .*, no tie-break, sha256 [0-9a-f]{64}$/),
+      // A valid document for the other round: it has a hash, but scores nothing and is not ranked.
+      expect.stringMatching(
+        /^invalid\. broken: 0\.0 points, .*, no tie-break, sha256 [0-9a-f]{64}$/,
+      ),
     ]);
     expect(result.code).toBe(1);
     expect(result.stderr).toMatch(/^entry broken: picks\.kind: /);

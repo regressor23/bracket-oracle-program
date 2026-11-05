@@ -236,6 +236,17 @@ describe('underdog ×1.5', () => {
     });
   });
 
+  it('counts picks on a replaced team as picks on its replacement', () => {
+    // Every prediction picked the team that was later replaced by a: a is no underdog.
+    const all = Array.from({ length: 8 }, () => doc(bracketPicks({ 'ubqf-1': 'old' })));
+    const settings = { underdog: pickShares(all), replacements: { old: 'a' } };
+    expect(isUnderdog(settings.underdog, 'ubqf-1', 'a', settings.replacements)).toBe(false);
+    expect(scorePrediction(tiMain, all[0]!, tiResults(), settings).picks[0]).toMatchObject({
+      points: 100,
+      underdog: false,
+    });
+  });
+
   it('does not multiply the exact-score bonus', () => {
     const shares = pickShares([...others, lone]);
     const withScore = doc(bracketPicks({ ...feeders, 'lbr1-1': { winner: 'd', score: [2, 0] } }));
@@ -267,6 +278,39 @@ describe('picks that cannot score', () => {
     expect(result.picks.find((p) => p.path === 'picks.slots.ubsf-1')).toMatchObject({
       result: 'stale',
       points: 0,
+    });
+  });
+
+  it('counts a pick on a team the earlier picks brought there, with the other side unknown', () => {
+    // ubqf-2 is left empty: a still reaches the semifinal, so backing a there counts.
+    const result = score(tiMain, bracketPicks({ 'ubqf-1': 'a', 'ubsf-1': 'a' }), tiResults());
+    expect(result.picks.map((p) => [p.path, p.result, p.points])).toEqual([
+      ['picks.slots.ubqf-1', 'correct', 100],
+      ['picks.slots.ubsf-1', 'correct', 150],
+    ]);
+  });
+
+  it('keeps later picks on other teams after a stale pick', () => {
+    // ubsf-1 is stale (c was sent to the lower bracket), but f reached lbqf-2 through the
+    // player's own lbr1-2 pick, so the lbqf-2 pick on f still counts.
+    const picks = bracketPicks({
+      'ubqf-1': 'a',
+      'ubqf-2': 'd',
+      'ubqf-3': 'e',
+      'ubqf-4': 'g',
+      'ubsf-1': 'c',
+      'lbr1-2': 'f',
+      'lbqf-2': 'f',
+    });
+    const actual = tiResults({
+      'ubsf-1': series('a', 'c', 1, 2),
+      'lbqf-2': series('a', 'f', 0, 2),
+    });
+    const result = score(tiMain, picks, actual);
+    expect(result.picks.find((p) => p.path === 'picks.slots.ubsf-1')?.result).toBe('stale');
+    expect(result.picks.find((p) => p.path === 'picks.slots.lbqf-2')).toMatchObject({
+      result: 'correct',
+      points: 100,
     });
   });
 
@@ -336,6 +380,13 @@ describe('group stages', () => {
       ['picks.buckets.t4', 'correct', 100],
       ['picks.buckets.t9', 'stale', 0],
     ]);
+  });
+
+  it('leaves picks on a group without results pending', () => {
+    const gsl = roundStage(blastSlam, 'groups') as GslStage;
+    const picks: Picks = { kind: 'gsl', groups: { B: { first: 'e', second: 'f' } } };
+    const result = score(gsl, picks, { kind: 'gsl', groups: [] });
+    expect(result).toMatchObject({ points: 0, pending: 2 });
   });
 
   it('GSL: 10 for the first place and 10 for the second', () => {

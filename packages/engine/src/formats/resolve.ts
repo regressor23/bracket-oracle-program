@@ -12,7 +12,10 @@ export interface ResolvedSlot {
 
 export interface ResolvedBracket {
   slots: ResolvedSlot[];
-  /** Slots whose chosen winner is not one of the two teams the earlier picks put there. */
+  /**
+   * Slots whose chosen winner is not a team the starting positions and the earlier picks put
+   * there. A side that is still unknown does not make a pick on the known side stale.
+   */
   stalePicks: string[];
 }
 
@@ -42,8 +45,8 @@ export function resolveBracket(
     const top = teamFrom(slot.top);
     const bottom = teamFrom(slot.bottom);
     const pick = winners[slot.id] ?? null;
-    const fits =
-      pick !== null && top !== null && bottom !== null && (pick === top || pick === bottom);
+    // The picked team must be one the earlier picks brought here; the other side may be unknown.
+    const fits = pick !== null && (pick === top || pick === bottom);
     if (pick !== null && !fits) stalePicks.push(slot.id);
     const winner = fits ? pick : null;
     const loser = winner === null ? null : winner === top ? bottom : top;
