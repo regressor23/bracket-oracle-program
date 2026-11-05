@@ -1,0 +1,237 @@
+{
+  "$id": "https://github.com/regressor23/bracket-oracle-program/blob/main/packages/engine/predictions/prediction.schema.json",
+  "title": "Bracket Oracle prediction",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "format": {
+      "type": "number",
+      "const": 1
+    },
+    "tournament": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9_.-]{0,62}[A-Za-z0-9])?$",
+      "description": "An id the platform publishes: a tournament, a contest or a team."
+    },
+    "contest": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9_.-]{0,62}[A-Za-z0-9])?$",
+      "description": "Each round of a tournament is its own contest."
+    },
+    "round": {
+      "type": "string",
+      "enum": ["groups", "bracket"],
+      "description": "The product round: \"groups\" predicts the last stage before the playoffs."
+    },
+    "template": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": ["id", "version"],
+      "additionalProperties": false,
+      "description": "The format template, and its version, the round is scored with."
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991,
+      "description": "Save number of this prediction: 1 for the first save, then one more each time."
+    },
+    "picks": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "swiss"
+            },
+            "buckets": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9_.-]{0,62}[A-Za-z0-9])?$",
+                "description": "An id the platform publishes: a tournament, a contest or a team."
+              },
+              "additionalProperties": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "description": "The bucket id the player put each team in. Teams left out are not picked yet."
+            }
+          },
+          "required": ["kind", "buckets"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "gsl"
+            },
+            "groups": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9]{1,16}$",
+                "description": "Group label as the platform publishes it, for example \"A\"."
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "first": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9_.-]{0,62}[A-Za-z0-9])?$",
+                    "description": "An id the platform publishes: a tournament, a contest or a team."
+                  },
+                  "second": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9_.-]{0,62}[A-Za-z0-9])?$",
+                    "description": "An id the platform publishes: a tournament, a contest or a team."
+                  }
+                },
+                "additionalProperties": false
+              },
+              "description": "The teams the player expects to finish first and second in each group."
+            }
+          },
+          "required": ["kind", "groups"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "round-robin"
+            },
+            "groups": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9]{1,16}$",
+                "description": "Group label as the platform publishes it, for example \"A\"."
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "qualifiers": {
+                    "maxItems": 20,
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9_.-]{0,62}[A-Za-z0-9])?$",
+                      "description": "An id the platform publishes: a tournament, a contest or a team."
+                    }
+                  },
+                  "winner": {
+                    "description": "The group winner; one of the qualifiers.",
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9_.-]{0,62}[A-Za-z0-9])?$"
+                  }
+                },
+                "required": ["qualifiers"],
+                "additionalProperties": false
+              },
+              "description": "The teams the player expects to advance from each group, and its winner."
+            }
+          },
+          "required": ["kind", "groups"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "bracket"
+            },
+            "slots": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "winner": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9_.-]{0,62}[A-Za-z0-9])?$",
+                    "description": "An id the platform publishes: a tournament, a contest or a team."
+                  },
+                  "score": {
+                    "description": "Exact series score, the winner's maps first, for example [2, 1]. Bo3 and Bo5 only.",
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 3
+                      },
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 2
+                      }
+                    ],
+                    "items": false,
+                    "minItems": 2,
+                    "maxItems": 2
+                  }
+                },
+                "required": ["winner"],
+                "additionalProperties": false
+              },
+              "description": "The winner of each slot, by slot id. Slots left out are not picked yet."
+            }
+          },
+          "required": ["kind", "slots"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "tiebreak": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "maps": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000,
+              "description": "Total maps the player expects in the round."
+            }
+          },
+          "required": ["maps"],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Null while the player has not answered; such a prediction ranks last among ties."
+    }
+  },
+  "required": [
+    "format",
+    "tournament",
+    "contest",
+    "round",
+    "template",
+    "revision",
+    "picks",
+    "tiebreak"
+  ],
+  "additionalProperties": false
+}
