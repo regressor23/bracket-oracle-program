@@ -2,6 +2,25 @@ import { hashCanonical, sha256Hex, theInternational } from '@bracket-oracle/engi
 import { describe, expect, it } from 'vitest';
 import { run } from './run.js';
 
+const prediction = {
+  format: 1,
+  tournament: 'ti-2026',
+  contest: 'ti-2026-bracket',
+  round: 'bracket',
+  template: { id: 'ti', version: 1 },
+  revision: 2,
+  picks: {
+    kind: 'bracket',
+    slots: {
+      'ubqf-1': { winner: 'A', score: [2, 0] },
+      'ubqf-2': { winner: 'C' },
+      'ubsf-1': { winner: 'D' },
+    },
+  },
+  tiebreak: null,
+};
+const positions = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+
 const files: Record<string, string> = {
   'bracket.json': '{ "slot": "grand-final", "pick": "Team B", "round": 3 }',
   'broken.json': '{ "slot": ',
@@ -24,6 +43,15 @@ const files: Record<string, string> = {
       positions: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
       series: { 'ubqf-1': { team1: 'A', team2: 'C', score1: 2, score2: 0 } },
     },
+  }),
+  'prediction.json': JSON.stringify(prediction),
+  'prediction-teams.json': JSON.stringify({
+    prediction,
+    participants: { kind: 'bracket', positions },
+  }),
+  'prediction-bad.json': JSON.stringify({
+    ...prediction,
+    picks: { kind: 'bracket', slots: { gf: { winner: 'A', score: [2, 1] } } },
   }),
   'bad-format.json': JSON.stringify({
     ...theInternational,
@@ -84,6 +112,33 @@ describe('verify CLI', () => {
     const result = await run(['outcomes', 'wrong-teams.json'], read);
     expect(result.code).toBe(1);
     expect(result.stderr).toBe('ubqf-1: result is A vs C, the slot holds A vs B');
+  });
+
+  it('prints the hash a wallet signs for a prediction', async () => {
+    const result = await run(['prediction', 'prediction.json'], read);
+    expect(result.code).toBe(0);
+    expect(result.stdout.split('\n')).toEqual([
+      'contest ti-2026-bracket, ti v1, bracket round, revision 2',
+      `sha256 ${hashCanonical(prediction)}`,
+      'picks: 3 of 14; tie-break: not answered',
+    ]);
+  });
+
+  it('checks a prediction against the teams of the stage', async () => {
+    const result = await run(['prediction', 'prediction-teams.json'], read);
+    expect(result.code).toBe(0);
+    const lines = result.stdout.split('\n');
+    // D lost ubqf-2 in this bracket, so it cannot win the upper semifinal.
+    expect(lines).toContain('stale: picks.slots.ubsf-1');
+    expect(lines.at(-1)).toMatch(/^missing: picks\.slots\.ubqf-3, .*, tiebreak$/);
+  });
+
+  it('lists the problems of an invalid prediction', async () => {
+    const result = await run(['prediction', 'prediction-bad.json'], read);
+    expect(result.code).toBe(1);
+    expect(result.stderr).toBe(
+      'prediction-bad.json is not a valid prediction:\n  picks.slots.gf.score: 2-1 does not end a Bo5',
+    );
   });
 
   it('prints usage for unknown commands', async () => {

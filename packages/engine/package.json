@@ -1,7 +1,7 @@
 {
   "name": "@bracket-oracle/engine",
   "version": "0.4.1",
-  "description": "Bracket Oracle scoring engine: canonical hashing and format templates; scoring, payouts and merkle roots next.",
+  "description": "Bracket Oracle scoring engine: canonical hashing, format templates, stage outcomes and prediction documents; scoring, payouts and merkle roots next.",
   "type": "module",
   "exports": {
     ".": {
@@ -9,18 +9,20 @@
       "default": "./dist/index.js"
     },
     "./formats/*.json": "./formats/*.json",
-    "./fixtures/replays/*.json": "./fixtures/replays/*.json"
+    "./fixtures/replays/*.json": "./fixtures/replays/*.json",
+    "./predictions/*.json": "./predictions/*.json"
   },
   "files": [
     "dist",
     "formats",
+    "predictions",
     "fixtures"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "formats:export": "pnpm run build && node scripts/export-formats.mjs && prettier --write formats",
+    "formats:export": "pnpm run build && node scripts/export-formats.mjs && prettier --write formats predictions",
     "version:check": "node scripts/check-version.mjs"
   },
   "dependencies": {

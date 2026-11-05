@@ -2,14 +2,17 @@ import { readFile } from 'node:fs/promises';
 import {
   ENGINE_VERSION,
   bracketOutcome,
+  checkPrediction,
   getFormatTemplate,
   gslGroupOutcome,
   hashCanonical,
   maxBasePoints,
   maxExactScoreBonus,
   pickCount,
+  picksMade,
   roundRobinGroupOutcome,
   roundStage,
+  stageParticipantsSchema,
   swissOutcome,
   validateFormat,
   type BracketResults,
@@ -18,6 +21,7 @@ import {
   type GslGroupResults,
   type OutcomeIssue,
   type RoundRobinGroupResults,
+  type StageParticipants,
   type SwissResults,
 } from '@bracket-oracle/engine';
 
@@ -29,6 +33,9 @@ Commands:
   outcomes <file.json> Print a stage's outcomes from official results:
                        { "format": "<template id>" or a template, "stage": "<stage id>",
                          "results": bracket, Swiss or { "groups": [...] } results }
+  prediction <file.json>
+                       Check a prediction document and print the hash the wallet signed;
+                       pass { "prediction": ..., "participants": ... } to check the teams too
   version              Print the engine version used for verification
 
 Coming with stage 3: roots <pool.json> — recompute the entries and payouts merkle roots
@@ -129,6 +136,47 @@ function describeOutcomes(input: OutcomesInput): { lines: string[]; issues: Outc
   }
 }
 
+/** Checks a prediction file: a bare document, or one with the stage's participants. */
+function describePrediction(input: unknown): { lines: string[]; issues: string[] } {
+  let document = input;
+  let participants: StageParticipants | undefined;
+  if (input && typeof input === 'object' && 'prediction' in input) {
+    document = (input as { prediction: unknown }).prediction;
+    if ('participants' in input) {
+      const parsed = stageParticipantsSchema.safeParse(
+        (input as { participants: unknown }).participants,
+      );
+      if (!parsed.success) {
+        return {
+          lines: [],
+          issues: parsed.error.issues.map(
+            (i) => `participants${i.path.length ? `.${i.path.join('.')}` : ''}: ${i.message}`,
+          ),
+        };
+      }
+      participants = parsed.data;
+    }
+  }
+  const check = checkPrediction(document, participants ? { participants } : {});
+  const issues = check.issues.map((i) => `${i.path || '<root>'}: ${i.message}`);
+  const prediction = check.prediction;
+  if (!prediction) return { lines: [], issues };
+
+  const lines = [
+    `contest ${prediction.contest}, ${prediction.template.id} v${prediction.template.version}, ` +
+      `${prediction.round} round, revision ${prediction.revision}`,
+    `sha256 ${check.hash}`,
+  ];
+  const template = getFormatTemplate(prediction.template.id);
+  const stage = template && roundStage(template, prediction.round);
+  const total = stage ? ` of ${pickCount(stage)}` : '';
+  const tiebreak = prediction.tiebreak ? `${prediction.tiebreak.maps} maps` : 'not answered';
+  lines.push(`picks: ${picksMade(prediction.picks)}${total}; tie-break: ${tiebreak}`);
+  if (check.stale.length > 0) lines.push(`stale: ${check.stale.join(', ')}`);
+  if (check.missing.length > 0) lines.push(`missing: ${check.missing.join(', ')}`);
+  return { lines, issues };
+}
+
 async function readJson(file: string, read: (path: string) => Promise<string>): Promise<unknown> {
   return JSON.parse(await read(file)) as unknown;
 }
@@ -176,6 +224,23 @@ export async function run(
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
         return { code: 1, stdout: '', stderr: `Cannot compute outcomes from ${file}: ${message}` };
+      }
+    }
+    case 'prediction': {
+      if (!file) return { code: 2, stdout: '', stderr: USAGE };
+      try {
+        const { lines, issues } = describePrediction(await readJson(file, read));
+        return {
+          code: issues.length > 0 ? 1 : 0,
+          stdout: lines.join('\n'),
+          stderr:
+            issues.length > 0
+              ? [`${file} is not a valid prediction:`, ...issues.map((i) => `  ${i}`)].join('\n')
+              : '',
+        };
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        return { code: 1, stdout: '', stderr: `Cannot read ${file}: ${message}` };
       }
     }
     default:
