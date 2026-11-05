@@ -3,6 +3,10 @@ import {
   ENGINE_VERSION,
   bracketOutcome,
   checkPrediction,
+  entriesRoot,
+  entryLeafHash,
+  entryLeafSchema,
+  entryProof,
   formatPoints,
   getFormatTemplate,
   gslGroupOutcome,
@@ -17,6 +21,7 @@ import {
   stageParticipantsSchema,
   swissOutcome,
   validateFormat,
+  verifyProof,
   type BracketResults,
   type CanonicalValue,
   type FormatTemplate,
@@ -47,7 +52,11 @@ Commands:
                          "settings": optional underdog shares and team replacements }
   version              Print the engine version used for verification
 
-Coming with stage 3: roots <pool.json> — recompute the entries and payouts merkle roots
+  roots <file.json>    Recompute a contest's entries root from { "leaves": [...] }, compare it
+                       with "root" and print the proof of "entry" when given; or check a
+                       proof given as { "leaf": {...}, "proof": [...], "root": "..." }
+
+Coming with stage 4: the payouts root
 and compare them with the values recorded on-chain.`;
 
 export interface CliResult {
@@ -238,6 +247,47 @@ function describeScores(input: ScoreInput): { lines: string[]; issues: string[] 
   return { lines, issues };
 }
 
+/** The entries root of published leaves, or the check of one entry's proof. */
+function describeRoots(input: Record<string, unknown>): { lines: string[]; issues: string[] } {
+  if ('leaf' in input) {
+    const leaf = entryLeafSchema.safeParse(input.leaf);
+    if (!leaf.success) {
+      return {
+        lines: [],
+        issues: leaf.error.issues.map((i) => `leaf.${i.path.join('.')}: ${i.message}`),
+      };
+    }
+    const proof = Array.isArray(input.proof) ? (input.proof as string[]) : [];
+    // The leaf hash comes from the leaf itself, never from the file.
+    const hash = entryLeafHash(leaf.data);
+    const valid = verifyProof(hash, proof, String(input.root));
+    return valid
+      ? {
+          lines: [`proof valid: entry ${leaf.data.entry} is in root ${String(input.root)}`],
+          issues: [],
+        }
+      : {
+          lines: [],
+          issues: [
+            `proof invalid: entry ${leaf.data.entry} does not lead to root ${String(input.root)}`,
+          ],
+        };
+  }
+  if (!Array.isArray(input.leaves)) throw new Error('expected "leaves", or "leaf" with "proof"');
+  const root = entriesRoot(input.leaves);
+  const lines = [`entries root ${root.root}`, `${root.leaves.length} entries`];
+  const issues: string[] = [];
+  if (typeof input.root === 'string') {
+    if (input.root === root.root) lines.push('matches the published root');
+    else issues.push(`does not match the published root ${input.root}`);
+  }
+  if (typeof input.entry === 'string') {
+    const proof = entryProof(root, input.entry);
+    lines.push(`proof of ${input.entry}:`, ...proof.proof.map((h) => `  ${h}`));
+  }
+  return { lines, issues };
+}
+
 async function readJson(file: string, read: (path: string) => Promise<string>): Promise<unknown> {
   return JSON.parse(await read(file)) as unknown;
 }
@@ -316,6 +366,22 @@ export async function run(
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
         return { code: 1, stdout: '', stderr: `Cannot score ${file}: ${message}` };
+      }
+    }
+    case 'roots': {
+      if (!file) return { code: 2, stdout: '', stderr: USAGE };
+      try {
+        const { lines, issues } = describeRoots(
+          (await readJson(file, read)) as Record<string, unknown>,
+        );
+        return {
+          code: issues.length > 0 ? 1 : 0,
+          stdout: lines.join('\n'),
+          stderr: issues.join('\n'),
+        };
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        return { code: 1, stdout: '', stderr: `Cannot compute roots from ${file}: ${message}` };
       }
     }
     default:

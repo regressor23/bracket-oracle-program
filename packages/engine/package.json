@@ -1,7 +1,7 @@
 {
   "name": "@bracket-oracle/engine",
-  "version": "0.5.1",
-  "description": "Bracket Oracle scoring engine: canonical hashing, format templates, stage outcomes, prediction documents, scoring and ranking; payouts and merkle roots next.",
+  "version": "0.6.0",
+  "description": "Bracket Oracle scoring engine: canonical hashing, format templates, stage outcomes, prediction documents, scoring, ranking and merkle roots; payouts next.",
   "type": "module",
   "exports": {
     ".": {
@@ -10,12 +10,14 @@
     },
     "./formats/*.json": "./formats/*.json",
     "./fixtures/replays/*.json": "./fixtures/replays/*.json",
-    "./predictions/*.json": "./predictions/*.json"
+    "./predictions/*.json": "./predictions/*.json",
+    "./roots/*.json": "./roots/*.json"
   },
   "files": [
     "dist",
     "formats",
     "predictions",
+    "roots",
     "fixtures"
   ],
   "scripts": {

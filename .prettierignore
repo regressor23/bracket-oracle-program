@@ -2,3 +2,6 @@ pnpm-lock.yaml
 target
 dist
 coverage
+
+# Written by generate-test-vectors.py; kept byte for byte as Python prints it.
+packages/engine/roots/test-vectors.json

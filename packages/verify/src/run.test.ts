@@ -1,6 +1,17 @@
+import { createRequire } from 'node:module';
 import { hashCanonical, sha256Hex, theInternational } from '@bracket-oracle/engine';
 import { describe, expect, it } from 'vitest';
 import { run } from './run.js';
+
+const vectors = createRequire(import.meta.url)(
+  '@bracket-oracle/engine/roots/test-vectors.json',
+) as {
+  cases: {
+    leaves: { entry: string; [key: string]: unknown }[];
+    tree: { entry: string; proof: string[] }[];
+    root: string;
+  }[];
+};
 
 const prediction = {
   format: 1,
@@ -78,6 +89,25 @@ const files: Record<string, string> = {
       },
       { id: 'broken', prediction: { ...prediction, round: 'groups' } },
     ],
+  }),
+  'leaves.json': JSON.stringify({
+    leaves: vectors.cases[4]!.leaves,
+    root: vectors.cases[4]!.root,
+    entry: 'entry-3',
+  }),
+  'leaves-wrong-root.json': JSON.stringify({
+    leaves: vectors.cases[2]!.leaves,
+    root: vectors.cases[4]!.root,
+  }),
+  'proof.json': JSON.stringify({
+    leaf: vectors.cases[4]!.leaves.find((l) => l.entry === 'entry-3'),
+    proof: vectors.cases[4]!.tree[2]!.proof,
+    root: vectors.cases[4]!.root,
+  }),
+  'proof-bad.json': JSON.stringify({
+    leaf: { ...vectors.cases[4]!.leaves.find((l) => l.entry === 'entry-3')!, revision: 9 },
+    proof: vectors.cases[4]!.tree[2]!.proof,
+    root: vectors.cases[4]!.root,
   }),
   'bad-format.json': JSON.stringify({
     ...theInternational,
@@ -183,6 +213,30 @@ describe('verify CLI', () => {
     ]);
     expect(result.code).toBe(1);
     expect(result.stderr).toMatch(/^entry broken: picks\.kind: /);
+  });
+
+  it('recomputes an entries root and prints a proof', async () => {
+    const result = await run(['roots', 'leaves.json'], read);
+    expect(result.code).toBe(0);
+    expect(result.stdout.split('\n')).toEqual([
+      `entries root ${vectors.cases[4]!.root}`,
+      '5 entries',
+      'matches the published root',
+      'proof of entry-3:',
+      ...vectors.cases[4]!.tree[2]!.proof.map((h) => `  ${h}`),
+    ]);
+    const wrong = await run(['roots', 'leaves-wrong-root.json'], read);
+    expect(wrong.code).toBe(1);
+    expect(wrong.stderr).toBe(`does not match the published root ${vectors.cases[4]!.root}`);
+  });
+
+  it('checks a proof from the leaf itself', async () => {
+    expect(await run(['roots', 'proof.json'], read)).toMatchObject({
+      code: 0,
+      stdout: `proof valid: entry entry-3 is in root ${vectors.cases[4]!.root}`,
+    });
+    // The same proof with another revision in the leaf does not lead to the root.
+    expect((await run(['roots', 'proof-bad.json'], read)).code).toBe(1);
   });
 
   it('prints usage for unknown commands', async () => {
