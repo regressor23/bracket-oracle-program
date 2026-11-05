@@ -27,4 +27,13 @@ describe('ENGINE_VERSION', () => {
     expect(pkg.files).toContain('predictions');
     expect(pkg.exports['./predictions/*.json']).toBe('./predictions/*.json');
   });
+
+  it('ships the merkle root test vectors', () => {
+    const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8')) as {
+      files: string[];
+      exports: Record<string, unknown>;
+    };
+    expect(pkg.files).toContain('roots');
+    expect(pkg.exports['./roots/*.json']).toBe('./roots/*.json');
+  });
 });

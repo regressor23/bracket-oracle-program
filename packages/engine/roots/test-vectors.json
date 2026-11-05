@@ -1,0 +1,216 @@
+{
+  "description": "Entries root test vectors: leaf = SHA-256(0x00 || canonical JSON), node = SHA-256(0x01 || smaller || larger), odd hashes move up.",
+  "cases": [
+    {
+      "name": "no entries",
+      "leaves": [],
+      "tree": [],
+      "root": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "one entry",
+      "leaves": [
+        {
+          "contest": "ti-2026-bracket",
+          "entry": "entry-1",
+          "wallet": "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU",
+          "revision": 1,
+          "prediction": "8dac186c9f68cc7f36cf648c4a8bfc0a023e9ff81655ee19a9af86b215044b08"
+        }
+      ],
+      "tree": [
+        {
+          "entry": "entry-1",
+          "bytes": "{\"contest\":\"ti-2026-bracket\",\"entry\":\"entry-1\",\"kind\":\"entry\",\"prediction\":\"8dac186c9f68cc7f36cf648c4a8bfc0a023e9ff81655ee19a9af86b215044b08\",\"revision\":1,\"wallet\":\"7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU\"}",
+          "hash": "7e472c2cfbbb3cc986bdde9ddac51dbdfe907dedbde8d641764351552154bbd9",
+          "proof": []
+        }
+      ],
+      "root": "7e472c2cfbbb3cc986bdde9ddac51dbdfe907dedbde8d641764351552154bbd9"
+    },
+    {
+      "name": "two entries",
+      "leaves": [
+        {
+          "contest": "ti-2026-bracket",
+          "entry": "entry-2",
+          "wallet": "9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM",
+          "revision": 1,
+          "prediction": "c083428c99fa942fc1d1515dcbac5233d807c52fefd3be51cc6bae75e55768c6"
+        },
+        {
+          "contest": "ti-2026-bracket",
+          "entry": "entry-1",
+          "wallet": "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU",
+          "revision": 3,
+          "prediction": "8d51f0c5d579e105c2f073908df8656021b6bf3b901570a263be1b502b86cf39"
+        }
+      ],
+      "tree": [
+        {
+          "entry": "entry-1",
+          "bytes": "{\"contest\":\"ti-2026-bracket\",\"entry\":\"entry-1\",\"kind\":\"entry\",\"prediction\":\"8d51f0c5d579e105c2f073908df8656021b6bf3b901570a263be1b502b86cf39\",\"revision\":3,\"wallet\":\"7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU\"}",
+          "hash": "25141ee86f187741be01ab3f9354cedc1b081ffb489542190cf8952f60a95198",
+          "proof": [
+            "614017b61b8efbefac8ca6141b2235219ac272212988ccfabaa90ebae7ffb681"
+          ]
+        },
+        {
+          "entry": "entry-2",
+          "bytes": "{\"contest\":\"ti-2026-bracket\",\"entry\":\"entry-2\",\"kind\":\"entry\",\"prediction\":\"c083428c99fa942fc1d1515dcbac5233d807c52fefd3be51cc6bae75e55768c6\",\"revision\":1,\"wallet\":\"9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM\"}",
+          "hash": "614017b61b8efbefac8ca6141b2235219ac272212988ccfabaa90ebae7ffb681",
+          "proof": [
+            "25141ee86f187741be01ab3f9354cedc1b081ffb489542190cf8952f60a95198"
+          ]
+        }
+      ],
+      "root": "c7bf3327e6d877daf5bfca37e05089c10e1caf78c7209a3950a3e071392d47ec"
+    },
+    {
+      "name": "three entries: the odd hash moves up",
+      "leaves": [
+        {
+          "contest": "ti-2026-bracket",
+          "entry": "entry-3",
+          "wallet": "4Nd1mBQtrMJVYVfKf2PJy9NZUZdTAsp7D4xWLs4gDB4T",
+          "revision": 2,
+          "prediction": "1fbd7397f32055cb3db51b46a5c0cb3d6ebc0a43f584fa9fa9d4e54434cff61c"
+        },
+        {
+          "contest": "ti-2026-bracket",
+          "entry": "entry-1",
+          "wallet": "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU",
+          "revision": 1,
+          "prediction": "8dac186c9f68cc7f36cf648c4a8bfc0a023e9ff81655ee19a9af86b215044b08"
+        },
+        {
+          "contest": "ti-2026-bracket",
+          "entry": "entry-2",
+          "wallet": "9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM",
+          "revision": 1,
+          "prediction": "c083428c99fa942fc1d1515dcbac5233d807c52fefd3be51cc6bae75e55768c6"
+        }
+      ],
+      "tree": [
+        {
+          "entry": "entry-1",
+          "bytes": "{\"contest\":\"ti-2026-bracket\",\"entry\":\"entry-1\",\"kind\":\"entry\",\"prediction\":\"8dac186c9f68cc7f36cf648c4a8bfc0a023e9ff81655ee19a9af86b215044b08\",\"revision\":1,\"wallet\":\"7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU\"}",
+          "hash": "7e472c2cfbbb3cc986bdde9ddac51dbdfe907dedbde8d641764351552154bbd9",
+          "proof": [
+            "614017b61b8efbefac8ca6141b2235219ac272212988ccfabaa90ebae7ffb681",
+            "0f7104e680b59c8cf8069037106ff2de54f46d3ac52a4981d4f3ec88b965f03d"
+          ]
+        },
+        {
+          "entry": "entry-2",
+          "bytes": "{\"contest\":\"ti-2026-bracket\",\"entry\":\"entry-2\",\"kind\":\"entry\",\"prediction\":\"c083428c99fa942fc1d1515dcbac5233d807c52fefd3be51cc6bae75e55768c6\",\"revision\":1,\"wallet\":\"9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM\"}",
+          "hash": "614017b61b8efbefac8ca6141b2235219ac272212988ccfabaa90ebae7ffb681",
+          "proof": [
+            "7e472c2cfbbb3cc986bdde9ddac51dbdfe907dedbde8d641764351552154bbd9",
+            "0f7104e680b59c8cf8069037106ff2de54f46d3ac52a4981d4f3ec88b965f03d"
+          ]
+        },
+        {
+          "entry": "entry-3",
+          "bytes": "{\"contest\":\"ti-2026-bracket\",\"entry\":\"entry-3\",\"kind\":\"entry\",\"prediction\":\"1fbd7397f32055cb3db51b46a5c0cb3d6ebc0a43f584fa9fa9d4e54434cff61c\",\"revision\":2,\"wallet\":\"4Nd1mBQtrMJVYVfKf2PJy9NZUZdTAsp7D4xWLs4gDB4T\"}",
+          "hash": "0f7104e680b59c8cf8069037106ff2de54f46d3ac52a4981d4f3ec88b965f03d",
+          "proof": [
+            "21b079a855120a05252a6bb84cf448d1efa07ef1127ad309c305d4fb3c63ec95"
+          ]
+        }
+      ],
+      "root": "1c615a205fcc245c183b14ebe036ee657e5daed70d312c687c545c65f32f98f8"
+    },
+    {
+      "name": "five entries, given out of order",
+      "leaves": [
+        {
+          "contest": "ti-2026-bracket",
+          "entry": "entry-4",
+          "wallet": "DRpbCBMxVnDK7maPM5tGv6MvB3v1sRMC86PZ8okm21hy",
+          "revision": 1,
+          "prediction": "2b0d9d8cffaf100748e8ad2c10619fceaf5c298066bc5102585511f8ce582b69"
+        },
+        {
+          "contest": "ti-2026-bracket",
+          "entry": "entry-2",
+          "wallet": "9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM",
+          "revision": 5,
+          "prediction": "b25d2aa84e47c1e6b7ad7f48903996bca364bcaf038b02b2979a74fc9d6bf141"
+        },
+        {
+          "contest": "ti-2026-bracket",
+          "entry": "entry-5",
+          "wallet": "HN7cABqLq46Es1jh92dQQisAq662SmxELLLsHHe4YWrH",
+          "revision": 2,
+          "prediction": "00491ca860c62f901a4c6e8dca9bbeb4fed793531801e91be3112c68521433f0"
+        },
+        {
+          "contest": "ti-2026-bracket",
+          "entry": "entry-1",
+          "wallet": "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU",
+          "revision": 1,
+          "prediction": "8dac186c9f68cc7f36cf648c4a8bfc0a023e9ff81655ee19a9af86b215044b08"
+        },
+        {
+          "contest": "ti-2026-bracket",
+          "entry": "entry-3",
+          "wallet": "4Nd1mBQtrMJVYVfKf2PJy9NZUZdTAsp7D4xWLs4gDB4T",
+          "revision": 1,
+          "prediction": "36e02e4e073006d42ff768d786251aec9a4c8c30b8aa2f62cdcb1624eccbd8f9"
+        }
+      ],
+      "tree": [
+        {
+          "entry": "entry-1",
+          "bytes": "{\"contest\":\"ti-2026-bracket\",\"entry\":\"entry-1\",\"kind\":\"entry\",\"prediction\":\"8dac186c9f68cc7f36cf648c4a8bfc0a023e9ff81655ee19a9af86b215044b08\",\"revision\":1,\"wallet\":\"7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU\"}",
+          "hash": "7e472c2cfbbb3cc986bdde9ddac51dbdfe907dedbde8d641764351552154bbd9",
+          "proof": [
+            "8ce68fae34c58ccd1d586b1d43ba193a563901749f3c8d77713f2143f3deca20",
+            "93f738ce5daf978e8637cb0bba5c3e6af663a87d646e2c66bf20ff17718acff5",
+            "3b3d13be3d67603501f23f8afad3d249a0e09126bff45abb4864e1bae1c5ca87"
+          ]
+        },
+        {
+          "entry": "entry-2",
+          "bytes": "{\"contest\":\"ti-2026-bracket\",\"entry\":\"entry-2\",\"kind\":\"entry\",\"prediction\":\"b25d2aa84e47c1e6b7ad7f48903996bca364bcaf038b02b2979a74fc9d6bf141\",\"revision\":5,\"wallet\":\"9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM\"}",
+          "hash": "8ce68fae34c58ccd1d586b1d43ba193a563901749f3c8d77713f2143f3deca20",
+          "proof": [
+            "7e472c2cfbbb3cc986bdde9ddac51dbdfe907dedbde8d641764351552154bbd9",
+            "93f738ce5daf978e8637cb0bba5c3e6af663a87d646e2c66bf20ff17718acff5",
+            "3b3d13be3d67603501f23f8afad3d249a0e09126bff45abb4864e1bae1c5ca87"
+          ]
+        },
+        {
+          "entry": "entry-3",
+          "bytes": "{\"contest\":\"ti-2026-bracket\",\"entry\":\"entry-3\",\"kind\":\"entry\",\"prediction\":\"36e02e4e073006d42ff768d786251aec9a4c8c30b8aa2f62cdcb1624eccbd8f9\",\"revision\":1,\"wallet\":\"4Nd1mBQtrMJVYVfKf2PJy9NZUZdTAsp7D4xWLs4gDB4T\"}",
+          "hash": "fc9813c97300e026e988c54131a379cf108e96312bf95460a7beea1559d6ac36",
+          "proof": [
+            "23e2cdb497409b29574fe13b515d6f4d2df93d98dbd40a4cd63f52d5008e0604",
+            "0bdc54b8ef6a3cb3d59d4d89bee4487811b9542590c460e80cfb10dffa97b323",
+            "3b3d13be3d67603501f23f8afad3d249a0e09126bff45abb4864e1bae1c5ca87"
+          ]
+        },
+        {
+          "entry": "entry-4",
+          "bytes": "{\"contest\":\"ti-2026-bracket\",\"entry\":\"entry-4\",\"kind\":\"entry\",\"prediction\":\"2b0d9d8cffaf100748e8ad2c10619fceaf5c298066bc5102585511f8ce582b69\",\"revision\":1,\"wallet\":\"DRpbCBMxVnDK7maPM5tGv6MvB3v1sRMC86PZ8okm21hy\"}",
+          "hash": "23e2cdb497409b29574fe13b515d6f4d2df93d98dbd40a4cd63f52d5008e0604",
+          "proof": [
+            "fc9813c97300e026e988c54131a379cf108e96312bf95460a7beea1559d6ac36",
+            "0bdc54b8ef6a3cb3d59d4d89bee4487811b9542590c460e80cfb10dffa97b323",
+            "3b3d13be3d67603501f23f8afad3d249a0e09126bff45abb4864e1bae1c5ca87"
+          ]
+        },
+        {
+          "entry": "entry-5",
+          "bytes": "{\"contest\":\"ti-2026-bracket\",\"entry\":\"entry-5\",\"kind\":\"entry\",\"prediction\":\"00491ca860c62f901a4c6e8dca9bbeb4fed793531801e91be3112c68521433f0\",\"revision\":2,\"wallet\":\"HN7cABqLq46Es1jh92dQQisAq662SmxELLLsHHe4YWrH\"}",
+          "hash": "3b3d13be3d67603501f23f8afad3d249a0e09126bff45abb4864e1bae1c5ca87",
+          "proof": [
+            "f88e17554e93307c2985bf613efb5c63e20d6b6002fdce5e1617efc0dd08c1b8"
+          ]
+        }
+      ],
+      "root": "9bc3f86b80c9cd4ca91f6dfaf64f3fcaef5f384ef8229d094369471cd7dab8c2"
+    }
+  ]
+}
