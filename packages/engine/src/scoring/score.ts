@@ -99,9 +99,21 @@ export function pickShares(predictions: readonly Prediction[]): PickShares {
   return { total: predictions.length, slots };
 }
 
-/** True when fewer than 25% of the round's predictions picked this winner for the slot. */
-export function isUnderdog(shares: PickShares, slot: string, team: string): boolean {
-  const picked = shares.slots[slot]?.[team] ?? 0;
+/**
+ * True when fewer than 25% of the round's predictions picked this winner for the slot. Picks on a
+ * team it replaced count as picks on it.
+ */
+export function isUnderdog(
+  shares: PickShares,
+  slot: string,
+  team: string,
+  replacements: Readonly<Record<string, string>> = {},
+): boolean {
+  const counts = shares.slots[slot] ?? {};
+  let picked = counts[team] ?? 0;
+  for (const [old, now] of Object.entries(replacements)) {
+    if (now === team && old !== team) picked += counts[old] ?? 0;
+  }
   return shares.total > 0 && picked * 4 < shares.total;
 }
 
@@ -178,8 +190,8 @@ function scoreBracket(
   const rounds = new Map(stage.rounds.map((r) => [r.id, r]));
   const actual = new Map(outcome.slots.map((s) => [s.id, s]));
   const winners = Object.fromEntries(Object.entries(picks.slots).map(([s, p]) => [s, p.winner]));
-  // A pick that does not fit the player's own earlier picks scores nothing: otherwise a bracket
-  // could back one team to lose early and win the final.
+  // A pick on a team the player's own earlier picks did not bring to the slot scores nothing:
+  // otherwise a bracket could back a team to lose a series and still win the slot after it.
   const stale = new Set(resolveBracket(stage, positionsOf(stage, outcome), winners).stalePicks);
   const scores: PickScore[] = [];
 
@@ -204,7 +216,8 @@ function scoreBracket(
     }
     const round = rounds.get(slot.round)!;
     const underdog =
-      settings.underdog !== undefined && isUnderdog(settings.underdog, slot.id, chosen.winner);
+      settings.underdog !== undefined &&
+      isUnderdog(settings.underdog, slot.id, chosen.winner, settings.replacements);
     const points = round.points * (underdog ? UNDERDOG_TENTHS : TENTHS);
     let bonus = 0;
     if (chosen.score && result.score && !result.forfeit && round.bestOf > 1) {
@@ -253,8 +266,8 @@ function scoreGsl(
       const team = group[place];
       if (team === undefined) continue;
       const path = `picks.groups.${label}.${place}`;
-      if (!actual) scores.push(pick(path, 'stale'));
-      else if (actual[place] === null) scores.push(pick(path, 'pending'));
+      // A group without results yet is still to be played.
+      if (!actual || actual[place] === null) scores.push(pick(path, 'pending'));
       else if (actual[place] === team) {
         scores.push(pick(path, 'correct', stage.points[place] * TENTHS));
       } else scores.push(pick(path, 'wrong'));
@@ -273,16 +286,14 @@ function scoreRoundRobin(
     const actual = groups.find((g) => g.group === label);
     group.qualifiers.forEach((team, i) => {
       const path = `picks.groups.${label}.qualifiers[${i}]`;
-      if (!actual) scores.push(pick(path, 'stale'));
-      else if (actual.qualifiers === null) scores.push(pick(path, 'pending'));
+      if (!actual || actual.qualifiers === null) scores.push(pick(path, 'pending'));
       else if (actual.qualifiers.includes(team)) {
         scores.push(pick(path, 'correct', stage.points.perQualifier * TENTHS));
       } else scores.push(pick(path, 'wrong'));
     });
     if (group.winner === undefined) continue;
     const path = `picks.groups.${label}.winner`;
-    if (!actual) scores.push(pick(path, 'stale'));
-    else if (actual.winner === null) scores.push(pick(path, 'pending'));
+    if (!actual || actual.winner === null) scores.push(pick(path, 'pending'));
     else if (actual.winner === group.winner) {
       scores.push(pick(path, 'correct', stage.points.groupWinner * TENTHS));
     } else scores.push(pick(path, 'wrong'));

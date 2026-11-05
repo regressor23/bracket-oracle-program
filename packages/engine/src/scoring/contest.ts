@@ -129,6 +129,8 @@ export interface ContestEntry {
 export interface ContestInput {
   template: FormatTemplate;
   round: Round;
+  /** When set, every prediction must be for this contest. */
+  contest?: string;
   results: StageResults;
   entries: readonly ContestEntry[];
   settings?: ScoringSettings;
@@ -144,7 +146,8 @@ export interface ScoredEntry {
   pending: number;
   tiebreak: number | null;
   distance: number | null;
-  place: { from: number; to: number };
+  /** Null for an invalid document: it scores nothing and is not ranked. */
+  place: { from: number; to: number } | null;
   /** Why the prediction scores nothing: it is not a valid document for this contest. */
   issues: string[];
 }
@@ -158,7 +161,7 @@ export interface ContestScore {
   mapsPlayed: number | null;
   /** Problems in the results; points are computed from what can be decided. */
   issues: OutcomeIssue[];
-  /** Best place first. */
+  /** Best place first; invalid documents last, without a place. */
   entries: ScoredEntry[];
 }
 
@@ -172,7 +175,10 @@ export function scoreContest(input: ContestInput): ContestScore {
   const maps = outcome.complete ? mapsPlayed(stage, results) : null;
 
   const scored = input.entries.map((entry) => {
-    const check = checkPrediction(entry.prediction, { template });
+    const check = checkPrediction(entry.prediction, {
+      template,
+      ...(input.contest === undefined ? {} : { contest: input.contest }),
+    });
     const issues = check.issues.map((i) => `${i.path || '<root>'}: ${i.message}`);
     if (check.prediction && check.prediction.round !== round) {
       issues.push(`round: the prediction is for the ${check.prediction.round} round`);
@@ -202,9 +208,11 @@ export function scoreContest(input: ContestInput): ContestScore {
     };
   });
 
-  const byId = new Map(scored.map((s) => [s.id, s]));
+  const valid = scored.filter((s) => s.issues.length === 0);
+  const invalid = scored.filter((s) => s.issues.length > 0);
+  const byId = new Map(valid.map((s) => [s.id, s]));
   const ranked = rankEntries(
-    scored.map(({ id, points, tiebreak }) => ({ id, points, tiebreak })),
+    valid.map(({ id, points, tiebreak }) => ({ id, points, tiebreak })),
     maps,
   );
   return {
@@ -214,6 +222,9 @@ export function scoreContest(input: ContestInput): ContestScore {
     complete: outcome.complete,
     mapsPlayed: maps,
     issues: outcome.issues,
-    entries: ranked.map((r) => ({ ...byId.get(r.id)!, distance: r.distance, place: r.place })),
+    entries: [
+      ...ranked.map((r) => ({ ...byId.get(r.id)!, distance: r.distance, place: r.place })),
+      ...invalid.map((s) => ({ ...s, distance: null, place: null })),
+    ],
   };
 }

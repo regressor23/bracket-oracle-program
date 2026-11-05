@@ -5,4 +5,4 @@ export * from './predictions/index.js';
 export * from './scoring/index.js';
 
 /** Bumped whenever scoring or hashing output can change. Recorded next to every published root. */
-export const ENGINE_VERSION = '0.5.0';
+export const ENGINE_VERSION = '0.5.1';

@@ -56,8 +56,7 @@ Picks by stage kind:
   slot, bucket or group, a full bucket, a score that cannot end the series, a group winner who is
   not among the qualifiers, a document for another contest or template version.
 - **Stale picks** no longer fit: a team that is not in the stage (for example one replaced before
-  its first series), or a bracket winner who is not one of the two teams the player's own earlier
-  picks put in that slot. They are kept and reported, and score nothing.
+  its first series), or a bracket winner that the starting positions and the player's own earlier picks did not bring to that slot. They are kept and reported, and score nothing.
 - **Missing picks** are still empty. An incomplete prediction is allowed: empty picks score nothing
   and an empty tie-break ranks last among equal points.
 
@@ -95,8 +94,9 @@ stage, computed from the official results. Points come from the format template;
 them in tenths as integers (75 is 7.5 points), so every sum is exact.
 
 - **Bracket:** a pick counts when the slot's actual winner is the picked team, however that team got
-  there. A pick that does not follow from the player's own earlier picks (stale) scores nothing, so
-  a bracket cannot back a team to lose early and still win later.
+  there. The player's own earlier picks must have brought that team to the slot (the other side may
+  still be empty); otherwise the pick is stale and scores nothing, so a bracket cannot back a team
+  to lose a series and still win the slot after it.
 - **Exact score:** +5 for a Bo3 and +10 for a Bo5 on top of a correct winner; nothing for a Bo1 or a
   forfeit.
 - **Swiss:** only the exact bucket scores. **GSL:** first and second place of each group.
