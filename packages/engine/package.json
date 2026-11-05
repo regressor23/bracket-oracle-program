@@ -1,7 +1,7 @@
 {
   "name": "@bracket-oracle/engine",
-  "version": "0.4.1",
-  "description": "Bracket Oracle scoring engine: canonical hashing, format templates, stage outcomes and prediction documents; scoring, payouts and merkle roots next.",
+  "version": "0.5.0",
+  "description": "Bracket Oracle scoring engine: canonical hashing, format templates, stage outcomes, prediction documents, scoring and ranking; payouts and merkle roots next.",
   "type": "module",
   "exports": {
     ".": {

@@ -18,4 +18,13 @@ describe('ENGINE_VERSION', () => {
     expect(pkg.files).toContain('fixtures');
     expect(pkg.exports['./fixtures/replays/*.json']).toBe('./fixtures/replays/*.json');
   });
+
+  it('ships the prediction JSON Schema', () => {
+    const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8')) as {
+      files: string[];
+      exports: Record<string, unknown>;
+    };
+    expect(pkg.files).toContain('predictions');
+    expect(pkg.exports['./predictions/*.json']).toBe('./predictions/*.json');
+  });
 });

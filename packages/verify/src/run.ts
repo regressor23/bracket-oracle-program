@@ -3,6 +3,7 @@ import {
   ENGINE_VERSION,
   bracketOutcome,
   checkPrediction,
+  formatPoints,
   getFormatTemplate,
   gslGroupOutcome,
   hashCanonical,
@@ -12,6 +13,7 @@ import {
   picksMade,
   roundRobinGroupOutcome,
   roundStage,
+  scoreContest,
   stageParticipantsSchema,
   swissOutcome,
   validateFormat,
@@ -21,6 +23,8 @@ import {
   type GslGroupResults,
   type OutcomeIssue,
   type RoundRobinGroupResults,
+  type ScoringSettings,
+  type StageResults,
   type StageParticipants,
   type SwissResults,
 } from '@bracket-oracle/engine';
@@ -36,6 +40,10 @@ Commands:
   prediction <file.json>
                        Check a prediction document and print the hash the wallet signed;
                        pass { "prediction": ..., "participants": ... } to check the teams too
+  score <file.json>    Recompute the points and places of a contest:
+                       { "format": "<template id>" or a template, "round": "groups" or "bracket",
+                         "results": the stage's results, "entries": [{ "id", "prediction" }],
+                         "settings": optional underdog shares and team replacements }
   version              Print the engine version used for verification
 
 Coming with stage 3: roots <pool.json> — recompute the entries and payouts merkle roots
@@ -177,6 +185,51 @@ function describePrediction(input: unknown): { lines: string[]; issues: string[]
   return { lines, issues };
 }
 
+interface ScoreInput {
+  format: string | FormatTemplate;
+  round: 'groups' | 'bracket';
+  results: StageResults;
+  entries: { id: string; prediction: unknown }[];
+  settings?: ScoringSettings;
+}
+
+/** Points and places of every entry, best first; problems go to stderr. */
+function describeScores(input: ScoreInput): { lines: string[]; issues: string[] } {
+  const template =
+    typeof input.format === 'string' ? getFormatTemplate(input.format) : input.format;
+  if (!template) throw new Error(`unknown format template "${String(input.format)}"`);
+  if (!Array.isArray(input.entries)) throw new Error('"entries" must be a list');
+  const contest = scoreContest({
+    template,
+    round: input.round,
+    results: input.results,
+    entries: input.entries,
+    ...(input.settings ? { settings: input.settings } : {}),
+  });
+  const state = contest.complete
+    ? `complete, ${contest.mapsPlayed} maps played`
+    : 'not complete, ties share places';
+  const lines = [
+    `${template.id} v${template.version}, ${contest.round} round (${contest.stage}): ${state}`,
+  ];
+  for (const e of contest.entries) {
+    const place = e.place.from === e.place.to ? `${e.place.from}` : `${e.place.from}-${e.place.to}`;
+    const tiebreak =
+      e.tiebreak === null
+        ? 'no tie-break'
+        : `tie-break ${e.tiebreak}${e.distance === null ? '' : ` (${e.distance} off)`}`;
+    lines.push(
+      `${place}. ${e.id}: ${formatPoints(e.points)} points, ${e.correct} correct, ` +
+        `${e.exactScores} exact, ${e.pending} pending, ${tiebreak}, sha256 ${e.hash ?? 'none'}`,
+    );
+  }
+  const issues = [
+    ...contest.issues.map((i) => `${i.at}: ${i.message}`),
+    ...contest.entries.flatMap((e) => e.issues.map((i) => `entry ${e.id}: ${i}`)),
+  ];
+  return { lines, issues };
+}
+
 async function readJson(file: string, read: (path: string) => Promise<string>): Promise<unknown> {
   return JSON.parse(await read(file)) as unknown;
 }
@@ -241,6 +294,20 @@ export async function run(
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
         return { code: 1, stdout: '', stderr: `Cannot read ${file}: ${message}` };
+      }
+    }
+    case 'score': {
+      if (!file) return { code: 2, stdout: '', stderr: USAGE };
+      try {
+        const { lines, issues } = describeScores((await readJson(file, read)) as ScoreInput);
+        return {
+          code: issues.length > 0 ? 1 : 0,
+          stdout: lines.join('\n'),
+          stderr: issues.join('\n'),
+        };
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        return { code: 1, stdout: '', stderr: `Cannot score ${file}: ${message}` };
       }
     }
     default:

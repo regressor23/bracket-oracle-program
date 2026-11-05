@@ -53,6 +53,32 @@ const files: Record<string, string> = {
     ...prediction,
     picks: { kind: 'bracket', slots: { gf: { winner: 'A', score: [2, 1] } } },
   }),
+  'contest.json': JSON.stringify({
+    format: 'ti',
+    round: 'bracket',
+    results: {
+      positions,
+      series: {
+        'ubqf-1': { team1: 'A', team2: 'B', score1: 2, score2: 0 },
+        'ubqf-2': { team1: 'C', team2: 'D', score1: 1, score2: 2 },
+      },
+    },
+    entries: [
+      { id: 'mine', prediction },
+      {
+        id: 'theirs',
+        prediction: {
+          ...prediction,
+          picks: {
+            kind: 'bracket',
+            slots: { 'ubqf-1': { winner: 'B' }, 'ubqf-2': { winner: 'D' } },
+          },
+          tiebreak: { maps: 30 },
+        },
+      },
+      { id: 'broken', prediction: { ...prediction, round: 'groups' } },
+    ],
+  }),
   'bad-format.json': JSON.stringify({
     ...theInternational,
     rounds: { bracket: { stage: 'nope', lockMinutesBefore: 5 } },
@@ -139,6 +165,22 @@ describe('verify CLI', () => {
     expect(result.stderr).toBe(
       'prediction-bad.json is not a valid prediction:\n  picks.slots.gf.score: 2-1 does not end a Bo5',
     );
+  });
+
+  it('recomputes the points and places of a contest', async () => {
+    const result = await run(['score', 'contest.json'], read);
+    expect(result.stdout.split('\n')).toEqual([
+      'ti v1, bracket round (main-event): not complete, ties share places',
+      // ubqf-1 right with the exact 2-0 (10 + 5); ubqf-2 wrong; ubsf-1 does not follow from them.
+      `1. mine: 15.0 points, 1 correct, 1 exact, 0 pending, no tie-break, sha256 ${hashCanonical(prediction)}`,
+      expect.stringMatching(
+        /^2\. theirs: 10\.0 points, 1 correct, 0 exact, 0 pending, tie-break 30, sha256 [0-9a-f]{64}$/,
+      ),
+      // A valid document for the other round: it has a hash but scores nothing here.
+      expect.stringMatching(/^3\. broken: 0\.0 points, .*, no tie-break, sha256 [0-9a-f]{64}$/),
+    ]);
+    expect(result.code).toBe(1);
+    expect(result.stderr).toMatch(/^entry broken: picks\.kind: /);
   });
 
   it('prints usage for unknown commands', async () => {
