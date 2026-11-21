@@ -1,0 +1,459 @@
+{
+  "event": "2026 World Championship",
+  "game": "lol",
+  "dates": "2026-10-15/2026-11-14",
+  "liquipedia": "https://liquipedia.net/leagueoflegends/World_Championship/2026",
+  "checkedOn": "2026-11-21",
+  "template": {
+    "id": "lol-worlds",
+    "version": 1
+  },
+  "notes": [
+    "The Play-In is not predicted. Karmine Corp won it 3-0 over MVK Esports and entered the Swiss stage.",
+    "Swiss rounds 1 and 2 and the round 3 middle pool are Bo1; series that decide advancing or elimination are Bo3. The knockout stage is Bo5 throughout."
+  ],
+  "teams": {
+    "anyones-legend": "Anyone's Legend",
+    "bilibili-gaming": "Bilibili Gaming",
+    "ctbc-flying-oyster": "CTBC Flying Oyster",
+    "dplus-kia": "Dplus KIA",
+    "g2-esports": "G2 Esports",
+    "gen-g": "Gen.G",
+    "hanwha-life-esports": "Hanwha Life Esports",
+    "invictus-gaming": "Invictus Gaming",
+    "karmine-corp": "Karmine Corp",
+    "los": "LOS",
+    "lyon": "LYON",
+    "movistar-koi": "Movistar KOI",
+    "t1": "T1",
+    "team-liquid": "Team Liquid",
+    "team-secret-whales": "Team Secret Whales",
+    "top-esports": "Top Esports"
+  },
+  "stages": {
+    "swiss-stage": {
+      "results": {
+        "teams": [
+          "dplus-kia",
+          "gen-g",
+          "invictus-gaming",
+          "t1",
+          "top-esports",
+          "bilibili-gaming",
+          "karmine-corp",
+          "lyon",
+          "hanwha-life-esports",
+          "los",
+          "movistar-koi",
+          "ctbc-flying-oyster",
+          "g2-esports",
+          "team-liquid",
+          "anyones-legend",
+          "team-secret-whales"
+        ],
+        "rounds": [
+          [
+            {
+              "team1": "gen-g",
+              "team2": "invictus-gaming",
+              "score1": 1,
+              "score2": 0,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "hanwha-life-esports",
+              "team2": "top-esports",
+              "score1": 1,
+              "score2": 0,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "bilibili-gaming",
+              "team2": "movistar-koi",
+              "score1": 0,
+              "score2": 1,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "anyones-legend",
+              "team2": "karmine-corp",
+              "score1": 0,
+              "score2": 1,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "g2-esports",
+              "team2": "dplus-kia",
+              "score1": 0,
+              "score2": 1,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "team-liquid",
+              "team2": "ctbc-flying-oyster",
+              "score1": 0,
+              "score2": 1,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "los",
+              "team2": "t1",
+              "score1": 0,
+              "score2": 1,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "team-secret-whales",
+              "team2": "lyon",
+              "score1": 0,
+              "score2": 1,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            }
+          ],
+          [
+            {
+              "team1": "ctbc-flying-oyster",
+              "team2": "movistar-koi",
+              "score1": 0,
+              "score2": 1,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "lyon",
+              "team2": "karmine-corp",
+              "score1": 1,
+              "score2": 0,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "hanwha-life-esports",
+              "team2": "gen-g",
+              "score1": 0,
+              "score2": 1,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "t1",
+              "team2": "dplus-kia",
+              "score1": 0,
+              "score2": 1,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "top-esports",
+              "team2": "anyones-legend",
+              "score1": 1,
+              "score2": 0,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "g2-esports",
+              "team2": "los",
+              "score1": 1,
+              "score2": 0,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "team-secret-whales",
+              "team2": "invictus-gaming",
+              "score1": 0,
+              "score2": 1,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "team-liquid",
+              "team2": "bilibili-gaming",
+              "score1": 0,
+              "score2": 1,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            }
+          ],
+          [
+            {
+              "team1": "movistar-koi",
+              "team2": "dplus-kia",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "gen-g",
+              "team2": "lyon",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "hanwha-life-esports",
+              "team2": "invictus-gaming",
+              "score1": 0,
+              "score2": 1,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "g2-esports",
+              "team2": "top-esports",
+              "score1": 0,
+              "score2": 1,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "ctbc-flying-oyster",
+              "team2": "t1",
+              "score1": 0,
+              "score2": 1,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "bilibili-gaming",
+              "team2": "karmine-corp",
+              "score1": 1,
+              "score2": 0,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "los",
+              "team2": "team-secret-whales",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "team-liquid",
+              "team2": "anyones-legend",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            }
+          ],
+          [
+            {
+              "team1": "movistar-koi",
+              "team2": "t1",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "invictus-gaming",
+              "team2": "lyon",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "top-esports",
+              "team2": "bilibili-gaming",
+              "score1": 2,
+              "score2": 1,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "karmine-corp",
+              "team2": "ctbc-flying-oyster",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "team-liquid",
+              "team2": "los",
+              "score1": 1,
+              "score2": 2,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "hanwha-life-esports",
+              "team2": "g2-esports",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            }
+          ],
+          [
+            {
+              "team1": "karmine-corp",
+              "team2": "movistar-koi",
+              "score1": 2,
+              "score2": 0,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "los",
+              "team2": "lyon",
+              "score1": 1,
+              "score2": 2,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            },
+            {
+              "team1": "hanwha-life-esports",
+              "team2": "bilibili-gaming",
+              "score1": 0,
+              "score2": 2,
+              "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026/Swiss_Stage"
+            }
+          ]
+        ]
+      },
+      "expected": {
+        "records": {
+          "dplus-kia": "3-0",
+          "gen-g": "3-0",
+          "invictus-gaming": "3-1",
+          "t1": "3-1",
+          "top-esports": "3-1",
+          "bilibili-gaming": "3-2",
+          "karmine-corp": "3-2",
+          "lyon": "3-2",
+          "hanwha-life-esports": "2-3",
+          "los": "2-3",
+          "movistar-koi": "2-3",
+          "ctbc-flying-oyster": "1-3",
+          "g2-esports": "1-3",
+          "team-liquid": "1-3",
+          "anyones-legend": "0-3",
+          "team-secret-whales": "0-3"
+        },
+        "buckets": {
+          "3-0": ["dplus-kia", "gen-g"],
+          "advance": [
+            "invictus-gaming",
+            "t1",
+            "top-esports",
+            "bilibili-gaming",
+            "karmine-corp",
+            "lyon"
+          ],
+          "eliminated": [
+            "hanwha-life-esports",
+            "los",
+            "movistar-koi",
+            "ctbc-flying-oyster",
+            "g2-esports",
+            "team-liquid"
+          ],
+          "0-3": ["anyones-legend", "team-secret-whales"]
+        }
+      }
+    },
+    "knockout-stage": {
+      "results": {
+        "positions": [
+          "dplus-kia",
+          "bilibili-gaming",
+          "t1",
+          "karmine-corp",
+          "gen-g",
+          "lyon",
+          "top-esports",
+          "invictus-gaming"
+        ],
+        "series": {
+          "qf-1": {
+            "team1": "dplus-kia",
+            "team2": "bilibili-gaming",
+            "score1": 0,
+            "score2": 3,
+            "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026"
+          },
+          "qf-2": {
+            "team1": "t1",
+            "team2": "karmine-corp",
+            "score1": 3,
+            "score2": 1,
+            "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026"
+          },
+          "sf-1": {
+            "team1": "bilibili-gaming",
+            "team2": "t1",
+            "score1": 3,
+            "score2": 1,
+            "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026"
+          },
+          "qf-3": {
+            "team1": "gen-g",
+            "team2": "lyon",
+            "score1": 3,
+            "score2": 0,
+            "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026"
+          },
+          "qf-4": {
+            "team1": "top-esports",
+            "team2": "invictus-gaming",
+            "score1": 1,
+            "score2": 3,
+            "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026"
+          },
+          "sf-2": {
+            "team1": "gen-g",
+            "team2": "invictus-gaming",
+            "score1": 3,
+            "score2": 0,
+            "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026"
+          },
+          "final": {
+            "team1": "bilibili-gaming",
+            "team2": "gen-g",
+            "score1": 3,
+            "score2": 1,
+            "source": "https://liquipedia.net/leagueoflegends/World_Championship/2026"
+          }
+        }
+      },
+      "expected": {
+        "champion": "bilibili-gaming",
+        "winners": {
+          "qf-1": "bilibili-gaming",
+          "qf-2": "t1",
+          "sf-1": "bilibili-gaming",
+          "qf-3": "gen-g",
+          "qf-4": "invictus-gaming",
+          "sf-2": "gen-g",
+          "final": "bilibili-gaming"
+        },
+        "placements": [
+          {
+            "team": "bilibili-gaming",
+            "from": 1,
+            "to": 1
+          },
+          {
+            "team": "gen-g",
+            "from": 2,
+            "to": 2
+          },
+          {
+            "team": "t1",
+            "from": 3,
+            "to": 4
+          },
+          {
+            "team": "invictus-gaming",
+            "from": 3,
+            "to": 4
+          },
+          {
+            "team": "dplus-kia",
+            "from": 5,
+            "to": 8
+          },
+          {
+            "team": "karmine-corp",
+            "from": 5,
+            "to": 8
+          },
+          {
+            "team": "lyon",
+            "from": 5,
+            "to": 8
+          },
+          {
+            "team": "top-esports",
+            "from": 5,
+            "to": 8
+          }
+        ]
+      }
+    }
+  }
+}
