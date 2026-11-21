@@ -6,4 +6,4 @@ export * from './scoring/index.js';
 export * from './roots/index.js';
 
 /** Bumped whenever scoring or hashing output can change. Recorded next to every published root. */
-export const ENGINE_VERSION = '0.6.0';
+export const ENGINE_VERSION = '0.6.1';

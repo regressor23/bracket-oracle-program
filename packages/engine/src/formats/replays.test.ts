@@ -62,7 +62,7 @@ function templateOf(fixture: Fixture): FormatTemplate {
 const winnerOf = (s: SeriesResult) => s.winner ?? (s.score1 > s.score2 ? s.team1 : s.team2);
 
 it('has fixtures to replay', () => {
-  expect(files.length).toBeGreaterThanOrEqual(8);
+  expect(files.length).toBeGreaterThanOrEqual(9);
 });
 
 describe.each(files)('%s', (file) => {
