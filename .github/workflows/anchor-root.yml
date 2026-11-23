@@ -1,0 +1,116 @@
+# Manual anchoring of a contest's entries root on Solana devnet as an SPL Memo.
+# Run it from Actions → Anchor entries root, with the contest id, the root and the entry count the
+# platform recorded at lock, after the lock. The job then reads the transaction back with the
+# verify CLI, the same check anyone can run.
+# Signs with the devnet deployer key (DEVNET_DEPLOYER_KEYPAIR, see deploy-devnet.yml), which
+# already holds devnet SOL. Devnet only: mainnet roots go into pool accounts in stage 3.
+name: Anchor entries root
+
+on:
+  workflow_dispatch:
+    inputs:
+      contest:
+        description: Contest id
+        required: true
+        type: string
+      root:
+        description: Entries root at lock, 64 lowercase hex characters
+        required: true
+        type: string
+      count:
+        description: Number of entries frozen at lock
+        required: true
+        type: string
+
+concurrency:
+  group: anchor-root
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  anchor:
+    name: Anchor the root on devnet
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SOLANA_RPC_URL: https://api.devnet.solana.com
+      # Inputs reach the scripts only through the environment, never pasted into shell code.
+      CONTEST: ${{ inputs.contest }}
+      ROOT: ${{ inputs.root }}
+      COUNT: ${{ inputs.count }}
+    steps:
+      - name: Check that the keypair secret is set
+        env:
+          DEPLOYER_KEYPAIR: ${{ secrets.DEVNET_DEPLOYER_KEYPAIR }}
+        run: |
+          if [ -z "$DEPLOYER_KEYPAIR" ]; then
+            echo "::error::Add the DEVNET_DEPLOYER_KEYPAIR repository secret"
+            exit 1
+          fi
+
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+
+      - name: Check the inputs without sending anything
+        run: |
+          node packages/anchor/dist/cli.js \
+            --contest "$CONTEST" --root "$ROOT" --count "$COUNT" --dry-run
+
+      - name: Write the keypair
+        env:
+          DEPLOYER_KEYPAIR: ${{ secrets.DEVNET_DEPLOYER_KEYPAIR }}
+        run: |
+          umask 077
+          mkdir -p "$RUNNER_TEMP/devnet-keys"
+          printf '%s' "$DEPLOYER_KEYPAIR" > "$RUNNER_TEMP/devnet-keys/signer.json"
+
+      - name: Send the memo transaction
+        run: |
+          node packages/anchor/dist/cli.js \
+            --contest "$CONTEST" --root "$ROOT" --count "$COUNT" \
+            --keypair "$RUNNER_TEMP/devnet-keys/signer.json" --json > "$RUNNER_TEMP/anchored.json"
+          cat "$RUNNER_TEMP/anchored.json"
+
+      - name: Remove the keypair
+        if: always()
+        run: rm -rf "$RUNNER_TEMP/devnet-keys"
+
+      - name: Read the root back with the verify CLI
+        run: |
+          node -e '
+            const fs = require("node:fs");
+            const a = JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
+            const check = { signature: a.signature, rpc: process.env.SOLANA_RPC_URL,
+              signer: a.signer, contest: a.contest, root: a.root, count: a.count };
+            fs.writeFileSync(process.argv[2], JSON.stringify(check));
+          ' "$RUNNER_TEMP/anchored.json" "$RUNNER_TEMP/check.json"
+          # Public devnet RPCs can take a few seconds to serve a just-confirmed transaction.
+          for attempt in 1 2 3 4 5; do
+            if node packages/verify/dist/cli.js onchain "$RUNNER_TEMP/check.json"; then exit 0; fi
+            sleep 4
+          done
+          exit 1
+
+      - name: Summary
+        run: |
+          node -e '
+            const a = JSON.parse(require("node:fs").readFileSync(process.argv[1], "utf8"));
+            console.log([
+              "### Entries root anchored on devnet",
+              "",
+              "- Contest: `" + a.contest + "`, " + a.count + " entries",
+              "- Root: `" + a.root + "`",
+              "- Signer: `" + a.signer + "`",
+              "- Transaction: [" + a.signature.slice(0, 16) + "…](" + a.explorer + ")",
+              "- Memo: `" + a.memo + "`",
+            ].join("\n"));
+          ' "$RUNNER_TEMP/anchored.json" >> "$GITHUB_STEP_SUMMARY"

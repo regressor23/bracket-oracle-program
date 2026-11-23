@@ -11,6 +11,7 @@ us lives here.
 | `programs/bracket_oracle` | Anchor program that holds pool funds and settles them by merkle root                              |
 | `packages/engine`         | Canonical JSON, hashing and [format templates](packages/engine/formats); scoring and payouts next |
 | `packages/verify`         | `bracket-oracle-verify` CLI: recompute hashes, check formats (and soon roots) yourself            |
+| `packages/anchor`         | `bracket-oracle-anchor` CLI: anchor a contest's entries root on Solana as an SPL Memo             |
 | `tests`                   | Integration tests that run the program on a local validator                                       |
 
 ## How verification will work
@@ -24,6 +25,65 @@ us lives here.
 
 Status: stage 0 skeleton. The program has a single `initialize_config` instruction; pools,
 entries, settlement and claims arrive in stage 3.
+
+## Anchoring entries roots today
+
+Until stage 3 records the entries root inside a pool account, the root of every contest is anchored
+on Solana devnet right after lock, as one SPL Memo transaction signed by the platform key:
+
+```text
+bracket-oracle:entries-root:v1:<contest>:<root>:<count>
+```
+
+The memo format lives in the engine (`entriesRootMemo`, `parseEntriesRootMemo`). Anyone can check
+an anchored root against the published leaves:
+
+```bash
+# anchored.json: { "signature": "<transaction>", "leaves": [ ...published leaves... ] }
+node packages/verify/dist/cli.js onchain anchored.json
+```
+
+The command reads the transaction from devnet (or from `"rpc"`), checks that it succeeded and who
+signed it, recomputes the root from the leaves and compares root, contest and entry count.
+
+Roots are anchored by hand from Actions → **Anchor entries root**, with the contest id, root and
+entry count the platform recorded at lock; the job signs with the devnet deployer key and reads the
+root back with the verify CLI. Locally:
+
+```bash
+node packages/anchor/dist/cli.js --leaves leaves.json --dry-run          # print the memo
+node packages/anchor/dist/cli.js --contest <id> --root <hex> --count <n> \
+  --keypair ~/.config/solana/devnet.json --rpc https://api.devnet.solana.com
+```
+
+## Dev3pack Global Hackathon, 27–29 November 2026
+
+Bracket Oracle is our submission. Players call a whole tier-1 Dota 2, CS2 or LoL bracket before the
+first match, sign it with their Solana wallet and climb a leaderboard; USDC pools come next. The web
+app (Next.js, Fastify API, BullMQ worker) lives in a private repository. This repository holds
+everything needed to check a result without trusting us.
+
+Live app: https://bracket-oracleweb-staging.up.railway.app, where the free test on the CS2 Major
+runs in December.
+
+**Built before the hackathon (October – November 2026)**
+
+- Anchor program skeleton (`initialize_config`) on devnet, with CI and a manual deploy workflow.
+- Engine 0.1 – 0.6: canonical JSON and SHA-256 receipts; format templates for The International,
+  CS2 Majors, BLAST Slam, PGL Wallachia, LoL Worlds and MSI; prediction documents the player's
+  wallet signs; scoring, tie-breaks and ranking; the entries merkle root at lock.
+- `bracket-oracle-verify`: hashes, formats, outcomes, scores and roots from published JSON.
+- In the private app: sign-in with email, Google or a Solana wallet; wallet-signed brackets with
+  server receipts; the entries root computed at every lock; live leaderboards; push reminders.
+
+**Built for the hackathon (from 23 November 2026)**
+
+- The Apache-2.0 licence.
+- Engine 0.7.0: the entries-root memo format.
+- `packages/anchor` and the **Anchor entries root** workflow: the root at lock goes to Solana devnet
+  as an SPL Memo signed by the platform key.
+- `bracket-oracle-verify onchain`: reads that transaction back and recomputes the root.
+- An integration test of the whole round trip on a local validator in CI.
 
 ## Develop
 

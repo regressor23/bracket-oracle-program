@@ -81,6 +81,8 @@ jobs:
       - name: Build program
         run: anchor build
       - run: pnpm install --frozen-lockfile
+      # The anchoring test imports @bracket-oracle/anchor and runs the verify CLI from dist.
+      - run: pnpm build
       # anchor test starts solana-test-validator with the program at the address from
       # Anchor.toml and runs tests/ against it; the wallet is a throwaway funded at genesis.
       - name: Test the program on a local validator

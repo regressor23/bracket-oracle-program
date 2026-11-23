@@ -20,3 +20,9 @@ export {
   type EntryLeaf,
   type EntryProof,
 } from './entries.js';
+export {
+  ENTRIES_ROOT_MEMO_PREFIX,
+  entriesRootMemo,
+  parseEntriesRootMemo,
+  type EntriesRootMemo,
+} from './memo.js';
