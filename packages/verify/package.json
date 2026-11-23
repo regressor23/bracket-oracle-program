@@ -1,5 +1,6 @@
 {
   "name": "@bracket-oracle/verify",
+  "license": "Apache-2.0",
   "version": "0.1.0",
   "description": "Recompute Bracket Oracle hashes and roots from published JSON.",
   "type": "module",
