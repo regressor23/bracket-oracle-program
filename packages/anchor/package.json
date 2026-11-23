@@ -1,0 +1,29 @@
+{
+  "name": "@bracket-oracle/anchor",
+  "license": "Apache-2.0",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Anchor a contest's entries root on Solana as an SPL Memo, until stage 3 records it in the pool.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/anchor.d.ts",
+      "default": "./dist/anchor.js"
+    }
+  },
+  "bin": {
+    "bracket-oracle-anchor": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@bracket-oracle/engine": "workspace:*",
+    "@solana/web3.js": "^1.99.0"
+  }
+}

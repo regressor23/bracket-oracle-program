@@ -11,6 +11,7 @@ import {
   getFormatTemplate,
   gslGroupOutcome,
   hashCanonical,
+  parseEntriesRootMemo,
   maxBasePoints,
   maxExactScoreBonus,
   pickCount,
@@ -55,6 +56,10 @@ Commands:
   roots <file.json>    Recompute a contest's entries root from { "leaves": [...] }, compare it
                        with "root" and print the proof of "entry" when given; or check a
                        proof given as { "leaf": {...}, "proof": [...], "root": "..." }
+  onchain <file.json>  Read an anchoring transaction from Solana and check its entries root:
+                       { "signature": "...", "rpc": optional URL (default Solana devnet),
+                         "signer": optional expected signer, "leaves": [...] to recompute
+                         the root, or "root", "contest" and "count" to compare }
 
 Coming with stage 4: the payouts root
 and compare them with the values recorded on-chain.`;
@@ -288,6 +293,103 @@ function describeRoots(input: Record<string, unknown>): { lines: string[]; issue
   return { lines, issues };
 }
 
+export const DEVNET_RPC = 'https://api.devnet.solana.com';
+const MEMO_PROGRAM_ID = 'MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr';
+
+/** Posts one JSON-RPC request and returns its `result`. */
+export type RpcCall = (url: string, method: string, params: unknown[]) => Promise<unknown>;
+
+const rpcCall: RpcCall = async (url, method, params) => {
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ jsonrpc: '2.0', id: 1, method, params }),
+  });
+  if (!response.ok) throw new Error(`RPC answered HTTP ${response.status}`);
+  const body = (await response.json()) as { result?: unknown; error?: { message?: string } };
+  if (body.error) throw new Error(`RPC error: ${body.error.message ?? 'unknown'}`);
+  return body.result;
+};
+
+interface ParsedTransaction {
+  slot: number;
+  blockTime: number | null;
+  meta: { err: unknown } | null;
+  transaction: {
+    message: {
+      accountKeys: { pubkey: string; signer: boolean }[];
+      instructions: { programId: string; parsed?: unknown }[];
+    };
+  };
+}
+
+/**
+ * Reads an anchoring transaction (see `entriesRootMemo` in the engine) and checks the root in its
+ * memo against the leaves, or against the root, contest and count given in the file.
+ */
+async function describeOnchain(
+  input: Record<string, unknown>,
+  call: RpcCall,
+): Promise<{ lines: string[]; issues: string[] }> {
+  if (typeof input.signature !== 'string') throw new Error('expected "signature"');
+  const rpc = typeof input.rpc === 'string' ? input.rpc : DEVNET_RPC;
+  const tx = (await call(rpc, 'getTransaction', [
+    input.signature,
+    { encoding: 'jsonParsed', commitment: 'confirmed', maxSupportedTransactionVersion: 0 },
+  ])) as ParsedTransaction | null;
+  if (!tx) return { lines: [], issues: [`transaction ${input.signature} was not found`] };
+
+  const when = tx.blockTime ? ` at ${new Date(tx.blockTime * 1000).toISOString()}` : '';
+  const lines = [`transaction ${input.signature}: slot ${tx.slot}${when}`];
+  const issues: string[] = [];
+  if (!tx.meta || tx.meta.err !== null) {
+    issues.push(`the transaction failed: ${JSON.stringify(tx.meta?.err ?? 'no status')}`);
+  }
+  const signers = tx.transaction.message.accountKeys.filter((k) => k.signer).map((k) => k.pubkey);
+  lines.push(`signed by ${signers.join(', ')}`);
+  if (typeof input.signer === 'string' && !signers.includes(input.signer)) {
+    issues.push(`not signed by ${input.signer}`);
+  }
+
+  const memos = tx.transaction.message.instructions
+    .filter((ix) => ix.programId === MEMO_PROGRAM_ID && typeof ix.parsed === 'string')
+    .map((ix) => parseEntriesRootMemo(ix.parsed as string))
+    .filter((m) => m !== null);
+  if (memos.length !== 1) {
+    issues.push(`expected one entries-root memo, found ${memos.length}`);
+    return { lines, issues };
+  }
+  const anchored = memos[0]!;
+  lines.push(
+    `anchored: contest ${anchored.contest}, root ${anchored.root}, ${anchored.count} entries`,
+  );
+
+  let expected: { contest?: unknown; root?: unknown; count?: unknown } = input;
+  if (Array.isArray(input.leaves)) {
+    const computed = entriesRoot(input.leaves);
+    expected = {
+      contest: computed.leaves[0]?.leaf.contest ?? input.contest,
+      root: computed.root,
+      count: computed.leaves.length,
+    };
+    lines.push(`leaves: root ${computed.root}, ${computed.leaves.length} entries`);
+  }
+  const mismatches: string[] = [];
+  if (expected.root !== undefined && expected.root !== anchored.root) mismatches.push('root');
+  if (expected.contest !== undefined && expected.contest !== anchored.contest) {
+    mismatches.push('contest');
+  }
+  if (expected.count !== undefined && expected.count !== anchored.count) mismatches.push('count');
+  if (expected.root === undefined) {
+    lines.push('nothing to compare: pass "leaves" or "root"');
+  } else if (mismatches.length === 0) {
+    lines.push('matches the anchored root');
+  } else {
+    issues.push(`does not match the anchored ${mismatches.join(', ')}`);
+  }
+  return { lines, issues };
+}
+
 async function readJson(file: string, read: (path: string) => Promise<string>): Promise<unknown> {
   return JSON.parse(await read(file)) as unknown;
 }
@@ -295,6 +397,7 @@ async function readJson(file: string, read: (path: string) => Promise<string>): 
 export async function run(
   args: string[],
   read: (path: string) => Promise<string> = (path) => readFile(path, 'utf8'),
+  call: RpcCall = rpcCall,
 ): Promise<CliResult> {
   const [command, file] = args;
   switch (command) {
@@ -382,6 +485,23 @@ export async function run(
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
         return { code: 1, stdout: '', stderr: `Cannot compute roots from ${file}: ${message}` };
+      }
+    }
+    case 'onchain': {
+      if (!file) return { code: 2, stdout: '', stderr: USAGE };
+      try {
+        const { lines, issues } = await describeOnchain(
+          (await readJson(file, read)) as Record<string, unknown>,
+          call,
+        );
+        return {
+          code: issues.length > 0 ? 1 : 0,
+          stdout: lines.join('\n'),
+          stderr: issues.join('\n'),
+        };
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        return { code: 1, stdout: '', stderr: `Cannot check ${file} on-chain: ${message}` };
       }
     }
     default:
