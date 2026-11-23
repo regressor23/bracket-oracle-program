@@ -78,4 +78,6 @@ Please report vulnerabilities privately — see [SECURITY.md](SECURITY.md).
 
 ## License
 
-Not chosen yet. Until a `LICENSE` file is added, all rights are reserved.
+Copyright 2026 the Bracket Oracle authors. Licensed under the [Apache License, Version 2.0](LICENSE):
+the program, the engine, the verify CLI and the tests in this repository may be used, changed and
+redistributed under its terms.

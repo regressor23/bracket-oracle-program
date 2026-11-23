@@ -1,5 +1,6 @@
 {
   "name": "@bracket-oracle/program-tests",
+  "license": "Apache-2.0",
   "version": "0.0.0",
   "private": true,
   "description": "Integration tests that run the program on a local validator through anchor test.",
