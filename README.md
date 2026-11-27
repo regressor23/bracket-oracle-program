@@ -35,16 +35,19 @@ on Solana devnet right after lock, as one SPL Memo transaction signed by the pla
 bracket-oracle:entries-root:v1:<contest>:<root>:<count>
 ```
 
-The memo format lives in the engine (`entriesRootMemo`, `parseEntriesRootMemo`). Anyone can check
-an anchored root against the published leaves:
+The memo format lives in the engine (`entriesRootMemo`, `parseEntriesRootMemo`). Anyone can read
+an anchored root back and compare it with the values the platform reports:
 
 ```bash
-# anchored.json: { "signature": "<transaction>", "leaves": [ ...published leaves... ] }
+# anchored.json: { "signature": "<transaction>", "contest": "<id>", "root": "<hex>", "count": <n> }
 node packages/verify/dist/cli.js onchain anchored.json
 ```
 
 The command reads the transaction from devnet (or from `"rpc"`), checks that it succeeded and who
-signed it, recomputes the root from the leaves and compares root, contest and entry count.
+signed it (`"signer"`), and compares root, contest and entry count. Given `"leaves"` instead, it
+recomputes the root from them. The leaves of live rounds are not published yet; they will be, with
+the USDC pools of stage 3. Until then the whole round trip, leaves included, runs in CI on a local
+validator (`tests/anchor-root.test.ts`).
 
 Roots are anchored by hand from Actions → **Anchor entries root**, with the contest id, root and
 entry count the platform recorded at lock; the job signs with the devnet deployer key and reads the
