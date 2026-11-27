@@ -85,6 +85,18 @@ runs in December.
 - `bracket-oracle-verify onchain`: reads that transaction back and recomputes the root.
 - An integration test of the whole round trip on a local validator in CI.
 
+**Anchored on devnet**
+
+The first roots anchored this way come from the two rounds of the warm-up test on staging (the CS2
+Major template), locked on 27 November 2026. Both transactions are signed by the devnet deployer
+`UUT3oQsGLf31VdpT9yGhH6rh2jMWH1MjyZ5oGhTCPEC`, and the workflow read each one back with
+`bracket-oracle-verify onchain`.
+
+| Round   | Contest                                | Entries | Transaction                                                                                                                                         |
+| ------- | -------------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Groups  | `c7aec749-0bd5-46df-a705-2e2ce2faaacf` | 3       | [53rx5wyx…](https://explorer.solana.com/tx/53rx5wyxB1QKoUCrQbP1pP1JE5nhKoNTJRU2Nj7SMVofRSL7rEqAGJRxP5QonXv1Vjx3rhXxDuKaEqM35wMPMRKL?cluster=devnet) |
+| Bracket | `13c9e6d4-3d4c-42f0-8440-3def20ab85f7` | 1       | [f2Ykz4qN…](https://explorer.solana.com/tx/f2Ykz4qNpJaSQcyVAnkYDzTywbgcRWvJzdVvnTn9n8xshFRgM617aSybzcWRSMLAAwPbXf4hp7TU9YxsEJWYyac?cluster=devnet)  |
+
 ## Develop
 
 ```bash
