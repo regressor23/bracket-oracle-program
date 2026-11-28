@@ -69,6 +69,8 @@ everything needed to check a result without trusting us.
 Live app: https://bracket-oracleweb-staging.up.railway.app, where the free test on the CS2 Major
 runs in December.
 
+Demo video (2:45): https://www.youtube.com/watch?v=WUKwOveWRLo
+
 **Built before the hackathon (October – November 2026)**
 
 - Anchor program skeleton (`initialize_config`) on devnet, with CI and a manual deploy workflow.
